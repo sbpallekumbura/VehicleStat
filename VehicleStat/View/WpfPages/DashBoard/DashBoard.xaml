@@ -28,7 +28,7 @@
                     TiltFactor="2"
                     Margin="5"
                     Height="Auto" Width="Auto"
-                    Grid.Row="1" Grid.Column="2">
+                    Grid.Row="1" Grid.Column="2" Click="Tile_Click_1">
                     <StackPanel Orientation="Vertical">
                 <Image Source="/VehicleStat;component/Images/WpfPage/DashBoard/view.png" Width="65" Height="65"/>
                     </StackPanel>
@@ -38,7 +38,7 @@
                     Margin="5"
                     Height="Auto" Width="Auto"   
                     Grid.Row="1" Grid.Column="3"
-                    Background="Green">
+                    Background="Green" Click="Tile_Click_2">
                     <StackPanel Orientation="Vertical">
                 <Image Source="/VehicleStat;component/Images/WpfPage/DashBoard/compare-icon.png" Width="120" Height="120"/>
                     </StackPanel>
@@ -48,7 +48,7 @@
                     Margin="5"
                     Height="Auto" Width="Auto"   
                     Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
-                    Background="#c42140"
+                    Background="#c42140" Click="Tile_Click_3"
                     >
                     <StackPanel Orientation="Vertical">
                 <Image Source="/VehicleStat;component/Images/WpfPage/DashBoard/charts.png" Width="200" Height="100"/>
