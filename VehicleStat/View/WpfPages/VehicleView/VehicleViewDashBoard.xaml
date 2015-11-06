@@ -1,0 +1,25 @@
+﻿<Page x:Class="View.WpfPages.VehicleView.VehicleViewDashBoard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="770">
+
+    <Border CornerRadius="5" BorderThickness="2">
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" >
+            <DockPanel x:Name="FileMenu" DockPanel.Dock="Top" Height="40" >
+                <StackPanel Orientation="Horizontal" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Width="200" HorizontalAlignment="Left">
+                    <Image Source="/VehicleStat;component/Images/WpfPage/DashBoard/view.png" Width="25" Height="25" Margin="5"/>
+                    <Label Content="Vehicle View" VerticalContentAlignment="Center" Margin="5" Foreground="White" FontSize="18" FontWeight="SemiBold"/>
+                </StackPanel>
+            </DockPanel>
+            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,0,0,0">
+                    <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+                </StackPanel>
+            </DockPanel>
+        </DockPanel>
+    </Border>
+</Page>
