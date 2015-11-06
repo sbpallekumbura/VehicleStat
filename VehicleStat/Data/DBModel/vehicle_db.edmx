@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="vehicle_dbModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="vehicle_dbModelStoreContainer">
+          <EntitySet Name="vehicle" EntityType="vehicle_dbModel.Store.vehicle" store:Type="Tables" Schema="vehicle_db" />
+        </EntityContainer>
+        <EntityType Name="vehicle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="registration_no" Type="char" MaxLength="16" />
+          <Property Name="test_datetime" Type="datetime" />
+          <Property Name="test_result" Type="char" MaxLength="1" />
+          <Property Name="registration_year" Type="int" />
+          <Property Name="make_by" Type="char" MaxLength="32" />
+          <Property Name="model" Type="char" MaxLength="32" />
+          <Property Name="manufacture_year" Type="int" />
+          <Property Name="number_of_cylinders" Type="int" />
+          <Property Name="vehicle_stroke" Type="int" />
+          <Property Name="fuel_type" Type="char" MaxLength="16" />
+          <Property Name="mileage" Type="int" />
+          <Property Name="class" Type="char" MaxLength="32" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="vehicle_dbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="vehicle_dbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="vehicles" EntityType="vehicle_dbModel.vehicle" />
+        </EntityContainer>
+        <EntityType Name="vehicle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="registration_no" Type="String" MaxLength="16" Unicode="false" FixedLength="true" />
+          <Property Name="test_datetime" Type="DateTime" Precision="0" />
+          <Property Name="test_result" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="registration_year" Type="Int32" />
+          <Property Name="make_by" Type="String" MaxLength="32" Unicode="false" FixedLength="true" />
+          <Property Name="model" Type="String" MaxLength="32" Unicode="false" FixedLength="true" />
+          <Property Name="manufacture_year" Type="Int32" />
+          <Property Name="number_of_cylinders" Type="Int32" />
+          <Property Name="vehicle_stroke" Type="Int32" />
+          <Property Name="fuel_type" Type="String" MaxLength="16" Unicode="false" FixedLength="true" />
+          <Property Name="mileage" Type="Int32" />
+          <Property Name="class" Type="String" MaxLength="32" Unicode="false" FixedLength="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="vehicle_dbModelStoreContainer" CdmEntityContainer="vehicle_dbEntities">
+          <EntitySetMapping Name="vehicles">
+            <EntityTypeMapping TypeName="vehicle_dbModel.vehicle">
+              <MappingFragment StoreEntitySet="vehicle">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="registration_no" ColumnName="registration_no" />
+                <ScalarProperty Name="test_datetime" ColumnName="test_datetime" />
+                <ScalarProperty Name="test_result" ColumnName="test_result" />
+                <ScalarProperty Name="registration_year" ColumnName="registration_year" />
+                <ScalarProperty Name="make_by" ColumnName="make_by" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="manufacture_year" ColumnName="manufacture_year" />
+                <ScalarProperty Name="number_of_cylinders" ColumnName="number_of_cylinders" />
+                <ScalarProperty Name="vehicle_stroke" ColumnName="vehicle_stroke" />
+                <ScalarProperty Name="fuel_type" ColumnName="fuel_type" />
+                <ScalarProperty Name="mileage" ColumnName="mileage" />
+                <ScalarProperty Name="class" ColumnName="class" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

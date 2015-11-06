@@ -1,0 +1,58 @@
+﻿<Page x:Class="VehicleStat.View.WpfPages.DashBoard.DashBoard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      mc:Ignorable="d" 
+      MinWidth="800" MinHeight="600"
+	 Title="DashBoard">
+
+    <Grid Margin="0,0,0,0">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+    
+        <controls:Tile Title="View"
+                    TiltFactor="2"
+                    Margin="5"
+                    Height="Auto" Width="Auto"
+                    Grid.Row="1" Grid.Column="2">
+                    <StackPanel Orientation="Vertical">
+                <Image Source="/VehicleStat;component/Images/WpfPage/DashBoard/view.png" Width="65" Height="65"/>
+                    </StackPanel>
+        </controls:Tile>
+        <controls:Tile Title="Comparison" 
+                    TiltFactor="2" 
+                    Margin="5"
+                    Height="Auto" Width="Auto"   
+                    Grid.Row="1" Grid.Column="3"
+                    Background="Green">
+                    <StackPanel Orientation="Vertical">
+                <Image Source="/VehicleStat;component/Images/WpfPage/DashBoard/compare-icon.png" Width="120" Height="120"/>
+                    </StackPanel>
+        </controls:Tile>
+        <controls:Tile Title="Analysis" 
+                    TiltFactor="2"                     
+                    Margin="5"
+                    Height="Auto" Width="Auto"   
+                    Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
+                    Background="#c42140"
+                    >
+                    <StackPanel Orientation="Vertical">
+                <Image Source="/VehicleStat;component/Images/WpfPage/DashBoard/charts.png" Width="200" Height="100"/>
+                    </StackPanel>
+        </controls:Tile>
+    </Grid>
+</Page>
