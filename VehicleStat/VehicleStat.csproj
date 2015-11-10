@@ -94,23 +94,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\DBModel\vehicle.cs">
-      <DependentUpon>vehicle_db.tt</DependentUpon>
+      <DependentUpon>VehicleDB_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\DBModel\vehicle_db.Context.cs">
+    <Compile Include="Data\DBModel\VehicleDB_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>vehicle_db.Context.tt</DependentUpon>
+      <DependentUpon>VehicleDB_Model.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\DBModel\vehicle_db.cs">
+    <Compile Include="Data\DBModel\VehicleDB_Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>vehicle_db.tt</DependentUpon>
+      <DependentUpon>VehicleDB_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\DBModel\vehicle_db.Designer.cs">
+    <Compile Include="Data\DBModel\VehicleDB_Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>vehicle_db.edmx</DependentUpon>
+      <DependentUpon>VehicleDB_Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\DBService\Implementions\VehicleService.cs" />
+    <Compile Include="Data\DBService\Implementions\GenericService.cs" />
     <Compile Include="Styles\ButtonStyle.xaml.cs">
       <DependentUpon>ButtonStyle.xaml</DependentUpon>
     </Compile>
@@ -129,8 +131,18 @@
     <Compile Include="Styles\TextBoxStyle.xaml.cs">
       <DependentUpon>TextBoxStyle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util\GUI\AlternationIndexToRowCountConverter.cs" />
+    <Compile Include="Util\GUI\GridViewColumnResize.cs" />
+    <Compile Include="Util\GUI\PageData.cs" />
+    <Compile Include="Util\GUI\PagingCollection.cs" />
     <Compile Include="View\WpfPages\DashBoard\DashBoard.xaml.cs">
       <DependentUpon>DashBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WpfPages\VehicleView\Content\VehicleSearchPage.xaml.cs">
+      <DependentUpon>VehicleSearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WpfPages\VehicleView\VehicleViewDashBoard.xaml.cs">
+      <DependentUpon>VehicleViewDashBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WpfWindows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -178,6 +190,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\WpfPages\VehicleView\Content\VehicleSearchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WpfPages\VehicleView\VehicleViewDashBoard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\WpfWindows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -205,22 +225,22 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Data\DBModel\vehicle_db.edmx">
+    <EntityDeploy Include="Data\DBModel\VehicleDB_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>vehicle_db.Designer.cs</LastGenOutput>
+      <LastGenOutput>VehicleDB_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Data\DBModel\vehicle_db.Context.tt">
+    <None Include="Data\DBModel\VehicleDB_Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>vehicle_db.edmx</DependentUpon>
-      <LastGenOutput>vehicle_db.Context.cs</LastGenOutput>
+      <DependentUpon>VehicleDB_Model.edmx</DependentUpon>
+      <LastGenOutput>VehicleDB_Model.Context.cs</LastGenOutput>
     </None>
-    <None Include="Data\DBModel\vehicle_db.edmx.diagram">
-      <DependentUpon>vehicle_db.edmx</DependentUpon>
+    <None Include="Data\DBModel\VehicleDB_Model.edmx.diagram">
+      <DependentUpon>VehicleDB_Model.edmx</DependentUpon>
     </None>
-    <None Include="Data\DBModel\vehicle_db.tt">
+    <None Include="Data\DBModel\VehicleDB_Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>vehicle_db.edmx</DependentUpon>
-      <LastGenOutput>vehicle_db.cs</LastGenOutput>
+      <DependentUpon>VehicleDB_Model.edmx</DependentUpon>
+      <LastGenOutput>VehicleDB_Model.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -276,12 +296,17 @@
     <Resource Include="Images\WpfPage\DashBoard\view.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\DBService\" />
+    <Folder Include="Data\DBService\Interfaces\" />
     <Folder Include="Images\WpfWindow\MainWindow\" />
-    <Folder Include="View\WpfPages\VehicleView\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\common\appbar.people.magnify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\common\appbar.arrow.right.black.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
