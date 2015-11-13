@@ -41,7 +41,7 @@ namespace VehicleStat.View.WpfPages.DashBoard
             }
         }
 
-        private void Tile_Click_1(object sender, RoutedEventArgs e)
+        private void vehicleSearchEvent(object sender, RoutedEventArgs e)
         {
             MainWindow.Instance.ContentFrame.Content = VehicleViewDashBoard.Instance;
         }
