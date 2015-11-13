@@ -23,7 +23,9 @@ namespace Util.GUI
         }
 
         public List<T> Collection { get; set; }
+
         public int CurrentPage { get; set; }
+
         public int PageSize
         {
             get
@@ -39,6 +41,7 @@ namespace Util.GUI
                 _pageSize = value;
             }
         }
+
         public int TotalCount
         {
             get
@@ -50,6 +53,7 @@ namespace Util.GUI
                 _totalCount = value;
             }
         }
+
         public List<PageData> PagesList
         {
             get
