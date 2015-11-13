@@ -29,7 +29,7 @@ namespace DBService.Implementions
             }
         }
 
-        internal static Util.GUI.PagingCollection<vehicle> GetSearchedVehicleListByPage(int page,string _searchText)
+        internal static Util.GUI.PagingCollection<vehicle> GetSearchedVehicleListByPage(int page, string _searchText)
         {
             PagingCollection<vehicle> pager = new PagingCollection<vehicle>();
             int pagesize = pager.PageSize;
