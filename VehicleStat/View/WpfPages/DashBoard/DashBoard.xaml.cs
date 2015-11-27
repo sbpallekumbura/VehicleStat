@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using View.WpfPages.VehicleStat;
 using View.WpfPages.VehicleView;
 using View.WpfWindows;
 
@@ -46,14 +47,10 @@ namespace VehicleStat.View.WpfPages.DashBoard
             MainWindow.Instance.ContentFrame.Content = VehicleViewDashBoard.Instance;
         }
 
-        private void Tile_Click_2(object sender, RoutedEventArgs e)
+        private void vehicleStatEvent(object sender, RoutedEventArgs e)
         {
-
+            MainWindow.Instance.ContentFrame.Content = VehicleStatDashBoard.Instance;
         }
-
-        private void Tile_Click_3(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

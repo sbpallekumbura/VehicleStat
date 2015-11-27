@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\App.xaml
-13423990566
+15-686251073
 
-25342487806
-22315223757
-Styles\ButtonStyle.xaml;Styles\CommonStyle.xaml;Styles\LabelStyle.xaml;Styles\MenuBarStyle.xaml;Styles\ProgressBarStyle.xaml;Styles\TabStyle.xaml;Styles\TextBoxStyle.xaml;Styles\ValidationStyles\ErrorStyle.xaml;View\WpfPages\DashBoard\DashBoard.xaml;View\WpfPages\VehicleView\Content\VehicleSearchPage.xaml;View\WpfPages\VehicleView\VehicleViewDashBoard.xaml;View\WpfWindows\MainWindow.xaml;View\WpfWindows\StartarWindow.xaml;
+301947801979
+25-1611589499
+Styles\ButtonStyle.xaml;Styles\CommonStyle.xaml;Styles\LabelStyle.xaml;Styles\MenuBarStyle.xaml;Styles\ProgressBarStyle.xaml;Styles\TabStyle.xaml;Styles\TextBoxStyle.xaml;Styles\ValidationStyles\ErrorStyle.xaml;View\WpfPages\VehicleStat\Content\VehicleCategoryDetailsPage.xaml;View\WpfPages\VehicleStat\VehicleStatDashBoard.xaml;View\WpfPages\DashBoard\DashBoard.xaml;View\WpfPages\VehicleView\Content\VehicleSearchPage.xaml;View\WpfPages\VehicleView\VehicleViewDashBoard.xaml;View\WpfWindows\MainWindow.xaml;View\WpfWindows\StartarWindow.xaml;
 
 False
 

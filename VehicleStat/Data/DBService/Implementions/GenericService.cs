@@ -10,7 +10,7 @@ namespace Data.DBService.Implementions
 {
     class GenericService<T>
     {
-        protected static vehicle_dbEntities db = new vehicle_dbEntities();
+        protected static energy_dbEntities db = new energy_dbEntities();
 
         public static void Insert(T entity)
         {

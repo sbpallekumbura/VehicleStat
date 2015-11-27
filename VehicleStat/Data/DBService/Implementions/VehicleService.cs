@@ -13,14 +13,14 @@ using Util.GUI;
 
 namespace DBService.Implementions
 {
-    class VehicleService:GenericService<vehicle>
+    class VehicleService:GenericService<tbl_emission_test>
     {
-        internal static vehicle GetVehicleByRegistrationNumber(string p)
+        internal static tbl_emission_test GetVehicleByRegistrationNumber(string p)
         {
             try
             {
-                vehicle _vehicle= db.vehicles.Where(v => v.registration_no.Trim() == p.Trim()).SingleOrDefault();
-                return _vehicle;
+                tbl_emission_test _tbl_emission_test= db.tbl_emission_test.Where(v => v.registration_no.Trim() == p.Trim()).SingleOrDefault();
+                return _tbl_emission_test;
             }
             catch(Exception Ex)
             {
@@ -29,18 +29,18 @@ namespace DBService.Implementions
             }
         }
 
-        internal static Util.GUI.PagingCollection<vehicle> GetSearchedVehicleListByPage(int page, string _searchText)
+        internal static Util.GUI.PagingCollection<tbl_emission_test> GetSearchedVehicleListByPage(int page, string _searchText)
         {
-            PagingCollection<vehicle> pager = new PagingCollection<vehicle>();
+            PagingCollection<tbl_emission_test> pager = new PagingCollection<tbl_emission_test>();
             int pagesize = pager.PageSize;
             int offset = pager.PageSize * (page - 1);
 
-            List<vehicle> _vehicle;
+            List<tbl_emission_test> _tbl_emission_test=null;
 
-            _vehicle = db.vehicles.Where(v => v.registration_no.Trim() == _searchText.Trim()).ToList();
+            _tbl_emission_test = db.tbl_emission_test.Where(v => v.registration_no.Trim() == _searchText.Trim()).ToList();
 
-            pager.Collection = _vehicle.Skip(offset).Take(pagesize).ToList();
-            pager.TotalCount = _vehicle.Count();
+            pager.Collection = _tbl_emission_test.Skip(offset).Take(pagesize).ToList();
+            pager.TotalCount = _tbl_emission_test.Count();
             pager.CurrentPage = page;
 
             return pager;

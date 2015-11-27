@@ -8,6 +8,7 @@ using System;
 using Util.GUI;
 using VehicleStat.Data.DBModel;
 using DBService.Implementions;
+using View.WpfWindows;
 
 
 namespace View.WpfPages.VehicleView.Content
@@ -22,10 +23,10 @@ namespace View.WpfPages.VehicleView.Content
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private List<vehicle> VehicleList;
+        private List<tbl_emission_test> VehicleList;
 
         public List<PageData> PagingList { get; set; }
-        private PagingCollection<vehicle> _PagingCollection { get; set; }
+        private PagingCollection<tbl_emission_test> _PagingCollection { get; set; }
 
         private VehicleSearchPage()
         {
@@ -60,12 +61,24 @@ namespace View.WpfPages.VehicleView.Content
 
         private void RefreshVehicleListByPage(int page)
         {
-            _PagingCollection = VehicleService.GetSearchedVehicleListByPage(page,_searchText);
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (o, ea) =>
+            {
+                _PagingCollection = VehicleService.GetSearchedVehicleListByPage(page,_searchText);
+                VehicleList = _PagingCollection.Collection;
+                PagingList = _PagingCollection.PagesList;
+                Dispatcher.Invoke((Action)(() => SearchedVehicleListView.ItemsSource = VehicleList));
+            };
+            worker.RunWorkerCompleted += (o, ea) =>
+            {
+                //work has completed. you can now interact with the UI
+                VehicleViewDashBoard.Instance.BusyBar.IsBusy = false;
+            };
+            //set the IsBusy before you start the thread
+            VehicleViewDashBoard.Instance.BusyBar.IsBusy = true;
+            worker.RunWorkerAsync();
 
-            VehicleList = _PagingCollection.Collection;
-            PagingList = _PagingCollection.PagesList;
-
-            SearchedVehicleListView.ItemsSource = VehicleList;
+            
             SearchedVehicleListView.Items.Refresh();
 
             PagingListView.ItemsSource = PagingList;
@@ -76,7 +89,6 @@ namespace View.WpfPages.VehicleView.Content
         {
             RefreshVehicleListByPage(1);
         }
-
 
         protected virtual void OnPropertyChanged(string name)
         {

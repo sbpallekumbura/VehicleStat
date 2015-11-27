@@ -12,13 +12,15 @@ namespace VehicleStat.Data.DBModel
     using System;
     using System.Collections.Generic;
     
-    public partial class vehicle
+    public partial class tbl_emission_test
     {
         public int id { get; set; }
         public string registration_no { get; set; }
         public Nullable<System.DateTime> test_datetime { get; set; }
         public string test_result { get; set; }
         public Nullable<int> registration_year { get; set; }
+        public Nullable<int> province_code { get; set; }
+        public Nullable<int> district_code { get; set; }
         public string make_by { get; set; }
         public string model { get; set; }
         public Nullable<int> manufacture_year { get; set; }
@@ -26,6 +28,7 @@ namespace VehicleStat.Data.DBModel
         public Nullable<int> vehicle_stroke { get; set; }
         public string fuel_type { get; set; }
         public Nullable<int> mileage { get; set; }
-        public string @class { get; set; }
+        public string vehicle_class { get; set; }
+        public string test_location { get; set; }
     }
 }

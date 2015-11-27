@@ -73,6 +73,10 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Interactivity">
       <HintPath>..\..\..\Libraries\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -87,32 +91,46 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libraries\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\..\Libraries\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\DBModel\vehicle.cs">
-      <DependentUpon>VehicleDB_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\DBModel\VehicleDB_Model.Context.cs">
+    <Compile Include="Data\DBModel\EnergyDB_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VehicleDB_Model.Context.tt</DependentUpon>
+      <DependentUpon>EnergyDB_Model.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\DBModel\VehicleDB_Model.cs">
+    <Compile Include="Data\DBModel\EnergyDB_Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VehicleDB_Model.tt</DependentUpon>
+      <DependentUpon>EnergyDB_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\DBModel\VehicleDB_Model.Designer.cs">
+    <Compile Include="Data\DBModel\EnergyDB_Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VehicleDB_Model.edmx</DependentUpon>
+      <DependentUpon>EnergyDB_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DBModel\tbl_emission_test.cs">
+      <DependentUpon>EnergyDB_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DBModel\tbl_search_key.cs">
+      <DependentUpon>EnergyDB_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DBModel\tbl_urban.cs">
+      <DependentUpon>EnergyDB_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\DBService\Implementions\VehicleService.cs" />
     <Compile Include="Data\DBService\Implementions\GenericService.cs" />
+    <Compile Include="Data\DBService\Implementions\VehicleStatService.cs" />
     <Compile Include="Styles\ButtonStyle.xaml.cs">
       <DependentUpon>ButtonStyle.xaml</DependentUpon>
     </Compile>
@@ -135,6 +153,12 @@
     <Compile Include="Util\GUI\GridViewColumnResize.cs" />
     <Compile Include="Util\GUI\PageData.cs" />
     <Compile Include="Util\GUI\PagingCollection.cs" />
+    <Compile Include="View\WpfPages\VehicleStat\Content\VehicleCategoryDetailsPage.xaml.cs">
+      <DependentUpon>VehicleCategoryDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WpfPages\VehicleStat\VehicleStatDashBoard.xaml.cs">
+      <DependentUpon>VehicleStatDashBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WpfPages\DashBoard\DashBoard.xaml.cs">
       <DependentUpon>DashBoard.xaml</DependentUpon>
     </Compile>
@@ -186,6 +210,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\WpfPages\VehicleStat\Content\VehicleCategoryDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WpfPages\VehicleStat\VehicleStatDashBoard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\WpfPages\DashBoard\DashBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,22 +257,22 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Data\DBModel\VehicleDB_Model.edmx">
+    <EntityDeploy Include="Data\DBModel\EnergyDB_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>VehicleDB_Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>EnergyDB_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Data\DBModel\VehicleDB_Model.Context.tt">
+    <None Include="Data\DBModel\EnergyDB_Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VehicleDB_Model.edmx</DependentUpon>
-      <LastGenOutput>VehicleDB_Model.Context.cs</LastGenOutput>
+      <DependentUpon>EnergyDB_Model.edmx</DependentUpon>
+      <LastGenOutput>EnergyDB_Model.Context.cs</LastGenOutput>
     </None>
-    <None Include="Data\DBModel\VehicleDB_Model.edmx.diagram">
-      <DependentUpon>VehicleDB_Model.edmx</DependentUpon>
+    <None Include="Data\DBModel\EnergyDB_Model.edmx.diagram">
+      <DependentUpon>EnergyDB_Model.edmx</DependentUpon>
     </None>
-    <None Include="Data\DBModel\VehicleDB_Model.tt">
+    <None Include="Data\DBModel\EnergyDB_Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VehicleDB_Model.edmx</DependentUpon>
-      <LastGenOutput>VehicleDB_Model.cs</LastGenOutput>
+      <DependentUpon>EnergyDB_Model.edmx</DependentUpon>
+      <LastGenOutput>EnergyDB_Model.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -307,6 +339,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\common\appbar.arrow.right.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\common\appbar.arrow.left.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

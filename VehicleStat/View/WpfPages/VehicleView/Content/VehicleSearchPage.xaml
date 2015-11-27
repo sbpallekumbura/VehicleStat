@@ -5,119 +5,128 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:util="clr-namespace:Util.GUI"
       mc:Ignorable="d" 
-      d:DesignHeight="430" d:DesignWidth="760" 
+      d:DesignHeight="430" d:DesignWidth="760" Background="Gainsboro"
 	  >
     <Page.Resources>
         <util:AlternationIndexToRowCountConverter x:Key="rowcountconverter" />
     </Page.Resources>
 
     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" >
-        <DockPanel DockPanel.Dock="Top" Height="60">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Label Content="Vehicle Register Number:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"  Style="{StaticResource MediumLabel}"/>
-                <TextBox x:Name="QuickSearchTextBox" Text="{Binding SearchText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="Enter Vehicle Number to Search" Margin="5" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="175" />
-                <Button x:Name="QuickSearchButton" Style="{StaticResource ButtonFormPrimaryBlue}"  HorizontalAlignment="left"  Margin="0" Padding="5" Width="Auto" Height="35" IsDefault="True" Click="QuickSearchButton_Click">
-                    <StackPanel Orientation="Horizontal"  Margin="0">
-                        <Image Source="/VehicleStat;component/Images/common/appbar.people.magnify.png" Margin="0,-3,0,0" Height="30"/>
-                        <Label Content="Find"  Style="{StaticResource LableInverse}" FontSize="16" Margin="0,0,5,0" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-        </DockPanel>
-        <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
-            <StackPanel>
+        <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top">
+            <DockPanel DockPanel.Dock="Top" Height="60">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Label Content="Vehicle Register Number:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"  Style="{StaticResource MediumLabel}"/>
+                    <TextBox x:Name="QuickSearchTextBox" Text="{Binding SearchText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="Enter Vehicle Number to Search" Margin="5" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="175" />
+                    <Button x:Name="QuickSearchButton" Style="{StaticResource ButtonFormPrimaryBlue}"  HorizontalAlignment="left"  Margin="0" Padding="5" Width="Auto" Height="35" IsDefault="True" Click="QuickSearchButton_Click">
+                        <StackPanel Orientation="Horizontal"  Margin="0">
+                            <Image Source="/VehicleStat;component/Images/common/appbar.people.magnify.png" Margin="0,-3,0,0" Height="30"/>
+                            <Label Content="Find"  Style="{StaticResource LableInverse}" FontSize="16" Margin="0,0,5,0" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+        <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top">
+            <DockPanel LastChildFill="True" Background="WhiteSmoke" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
                 <StackPanel>
-                    <ListView x:Name="SearchedVehicleListView" AlternationCount="10000" ItemsSource="{Binding SearchedVehicleList}" util:GridViewColumnResize.Enabled="True" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"  MinHeight="100" BorderBrush="{x:Null}" Background="{x:Null}">
-                       <ListView.View>
-                            <GridView AllowsColumnReorder="False">
-                                <GridViewColumn util:GridViewColumnResize.Width="30" DisplayMemberBinding="{Binding (ItemsControl.AlternationIndex),RelativeSource={RelativeSource AncestorType=ListViewItem},Converter={StaticResource rowcountconverter}}" >
-                                    <GridViewColumn.Header>
-                                        <GridViewColumnHeader Tag="NO">No</GridViewColumnHeader>
-                                    </GridViewColumn.Header>
-                                </GridViewColumn>
-                                <GridViewColumn util:GridViewColumnResize.Width="2*" DisplayMemberBinding="{Binding registration_no}">
-                                    <GridViewColumn.Header>
-                                        <GridViewColumnHeader Tag="Registration_No">Registration_No</GridViewColumnHeader>
-                                    </GridViewColumn.Header>
-                                </GridViewColumn>
-                                <GridViewColumn util:GridViewColumnResize.Width="3*" DisplayMemberBinding="{Binding test_datetime}" >
-                                    <GridViewColumn.Header>
-                                        <GridViewColumnHeader Tag="Measuring Date Time">Measuring Date Time</GridViewColumnHeader>
-                                    </GridViewColumn.Header>
-                                </GridViewColumn>
-                                <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding registration_year}">
-                                    <GridViewColumn.Header>
-                                        <GridViewColumnHeader Tag="Register Year">Register Year</GridViewColumnHeader>
-                                    </GridViewColumn.Header>
-                                </GridViewColumn>
-                                <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding make_by}">
-                                    <GridViewColumn.Header>
-                                        <GridViewColumnHeader Tag="Made By">Made By</GridViewColumnHeader>
-                                    </GridViewColumn.Header>
-                                </GridViewColumn>
-                                <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding model}">
-                                    <GridViewColumn.Header>
-                                        <GridViewColumnHeader Tag="Status">Model</GridViewColumnHeader>
-                                    </GridViewColumn.Header>
-                                </GridViewColumn>
-                                <GridViewColumn util:GridViewColumnResize.Width="50">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button x:Name="VehicleDetailsButton" BorderBrush="{x:Null}" Style="{StaticResource Win8}" VerticalAlignment="Center" Width="25" Height="25" Margin="0,0.5,0,0">
-                                                <StackPanel>
-                                                    <Image Source="/VehicleStat;component/images/common/appbar.arrow.right.black.png" Width="28" Height="28" Margin="-5" />
-                                                    <Label Content="{Binding ID}" HorizontalAlignment="Left" Width="125" Visibility="Hidden"/>
-                                                </StackPanel>
-                                            </Button>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
+                    <StackPanel>
+                        <ListView x:Name="SearchedVehicleListView" AlternationCount="10000" ItemsSource="{Binding SearchedVehicleList}" util:GridViewColumnResize.Enabled="True" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"  MinHeight="100" BorderBrush="{x:Null}" Background="{x:Null}">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn util:GridViewColumnResize.Width="30" DisplayMemberBinding="{Binding (ItemsControl.AlternationIndex),RelativeSource={RelativeSource AncestorType=ListViewItem},Converter={StaticResource rowcountconverter}}" >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Tag="NO">No</GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn util:GridViewColumnResize.Width="2*" DisplayMemberBinding="{Binding registration_no}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Tag="Registration_No">Registration_No</GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>                                    
+                                    <GridViewColumn util:GridViewColumnResize.Width="3*" DisplayMemberBinding="{Binding test_datetime}" >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Tag="Measuring Date Time">Measuring Date Time</GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn util:GridViewColumnResize.Width="1*" DisplayMemberBinding="{Binding mileage}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Tag="Mileage">Mileage</GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding registration_year}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Tag="Register Year">Register Year</GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding make_by}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Tag="Made By">Made By</GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding model}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Tag="Status">Model</GridViewColumnHeader>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    <GridViewColumn util:GridViewColumnResize.Width="50">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="VehicleDetailsButton" BorderBrush="{x:Null}" Style="{StaticResource Win8}" VerticalAlignment="Center" Width="25" Height="25" Margin="0,0.5,0,0">
+                                                    <StackPanel>
+                                                        <Image Source="/VehicleStat;component/images/common/appbar.arrow.right.black.png" Width="28" Height="28" Margin="-5" />
+                                                        <Label Content="{Binding ID}" HorizontalAlignment="Left" Width="125" Visibility="Hidden"/>
+                                                    </StackPanel>
+                                                </Button>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
 
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="BorderBrush" Value="LightGray" />
-                                <Setter Property="BorderThickness" Value="0,0,0,1" />
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=NeedToSave}" Value="True">
-                                        <!--<Setter Property="Background" Value="Gainsboro"  />
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="BorderBrush" Value="LightGray" />
+                                    <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=NeedToSave}" Value="True">
+                                            <!--<Setter Property="Background" Value="Gainsboro"  />
                                                         <Setter Property="FontWeight" Value="Bold" />-->
-                                        <Setter Property="BorderBrush" Value="LightBlue"/>
-                                        <Setter Property="BorderThickness" Value="1,1,1,1"/>
-                                        <Setter Property="ToolTip" Value="Please Save Changes"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
+                                            <Setter Property="BorderBrush" Value="LightBlue"/>
+                                            <Setter Property="BorderThickness" Value="1,1,1,1"/>
+                                            <Setter Property="ToolTip" Value="Please Save Changes"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
 
+                    </StackPanel>
+                    <StackPanel>
+                        <ListView x:Name="PagingListView" HorizontalContentAlignment="Right" ItemsSource="{Binding PagingList}" BorderBrush="{x:Null}" Background="{x:Null}" Height="30" Padding="0" Margin="0">
+                            <ListView.ItemsPanel >
+                                <ItemsPanelTemplate >
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate >
+                                    <StackPanel Orientation="Horizontal"  Margin="0">
+                                        <Button Name="PageButton" BorderBrush="{x:Null}" Content="{Binding Page}" Style="{StaticResource Win8}" VerticalAlignment="Center" Width="18" Height="20" FontSize="10" Margin="0" />
+                                    </StackPanel>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="Style" TargetName="PageButton" Value="{StaticResource Win8WBlue}" />
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel>
-                    <ListView x:Name="PagingListView" HorizontalContentAlignment="Right" ItemsSource="{Binding PagingList}" BorderBrush="{x:Null}" Background="{x:Null}" Height="30" Padding="0" Margin="0">
-                        <ListView.ItemsPanel >
-                            <ItemsPanelTemplate >
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0"></StackPanel>
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                        <ListView.ItemTemplate>
-                            <DataTemplate >
-                                <StackPanel Orientation="Horizontal"  Margin="0">
-                                    <Button Name="PageButton" BorderBrush="{x:Null}" Content="{Binding Page}" Style="{StaticResource Win8}" VerticalAlignment="Center" Width="18" Height="20" FontSize="10" Margin="0" />
-                                </StackPanel>
-                                <DataTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                        <Setter Property="Style" TargetName="PageButton" Value="{StaticResource Win8WBlue}" />
-                                    </DataTrigger>
-                                </DataTemplate.Triggers>
-                            </DataTemplate>
-
-                        </ListView.ItemTemplate>
-
-                    </ListView>
-                </StackPanel>
-            </StackPanel>
-        </DockPanel>
+            </DockPanel>
+        </Border>
     </DockPanel>
   </Page>

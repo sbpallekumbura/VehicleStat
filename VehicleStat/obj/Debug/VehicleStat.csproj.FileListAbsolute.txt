@@ -74,3 +74,10 @@ D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\obj\Debug\Veh
 D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\obj\Debug\VehicleStat.exe
 D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\obj\Debug\VehicleStat.pdb
 D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\obj\Debug\VehicleStat.csprojResolveAssemblyReference.cache
+D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\bin\Debug\WPFToolkit.Extended.dll
+D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\obj\Debug\View\WpfPages\VehicleStat\VehicleStatDashBoard.baml
+D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\obj\Debug\View\WpfPages\VehicleStat\VehicleStatDashBoard.g.cs
+D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\obj\Debug\View\WpfPages\VehicleStat\Content\VehicleCategoryDetailsPage.g.cs
+D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\obj\Debug\View\WpfPages\VehicleStat\Content\VehicleCategoryDetailsPage.baml
+D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll
+D:\Projects\Visual Studio 2012\VehicleStat\VehicleStat\VehicleStat\bin\Debug\WPFToolkit.dll

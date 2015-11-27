@@ -8,33 +8,33 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.ComponentModel;
-using View.WpfPages.VehicleView.Content;
-using VehicleStat.View.WpfPages.DashBoard;
 using View.WpfWindows;
+using VehicleStat.View.WpfPages.DashBoard;
+using View.WpfPages.VehicleStat.Content;
 
-namespace View.WpfPages.VehicleView
+namespace View.WpfPages.VehicleStat
 {
     /// <summary>
     /// Interaction logic for EmployeePage.xaml
     /// </summary>
-    public partial class VehicleViewDashBoard : Page
+    public partial class VehicleStatDashBoard : Page
     {
-        private static VehicleViewDashBoard _instance;
+        private static VehicleStatDashBoard _instance;
 
 
-        public VehicleViewDashBoard()
+        public VehicleStatDashBoard()
         {
             InitializeComponent();
-            ContentFrame.Content = VehicleSearchPage.Instance;
+            ContentFrame.Content = VehicleCategoryDetailsPage.Instance;
         }
 
-        public static VehicleViewDashBoard Instance
+        public static VehicleStatDashBoard Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new VehicleViewDashBoard();
+                    _instance = new VehicleStatDashBoard();
                 }
                 return _instance;
             }
