@@ -14,7 +14,7 @@
             <DockPanel DockPanel.Dock="Bottom" Height="25" HorizontalAlignment="Center" >
                 <Grid>
                     <Label HorizontalContentAlignment="Center" Style="{StaticResource SmallLabel}" Width="Auto" Margin="5,-2,0,0">
-                        Doer Innovative Technologies (Pvt) Ltd. Copyright ©2015 All Rights Reserved.
+                        Funded by National Science Foundation (NSF). Copyright ©2015 All Rights Reserved.
                     </Label>
                 </Grid>
             </DockPanel>

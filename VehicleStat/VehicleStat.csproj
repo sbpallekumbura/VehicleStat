@@ -137,6 +137,9 @@
     <Compile Include="Styles\CommonStyle.xaml.cs">
       <DependentUpon>CommonStyle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Styles\AzureTabItem.xaml.cs">
+      <DependentUpon>AzureTabItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Styles\LabelStyle.xaml.cs">
       <DependentUpon>LabelStyle.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\CommonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\AzureTabItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -342,6 +349,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\common\appbar.arrow.left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\WpfPage\DashBoard\University_of_Moratuwa_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

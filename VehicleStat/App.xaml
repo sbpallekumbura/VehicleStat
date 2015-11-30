@@ -4,23 +4,28 @@
              Startup="Application_Startup">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                
+            <ResourceDictionary.MergedDictionaries>               
+
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />-->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
 
-                <ResourceDictionary Source="Styles/CommonStyle.xaml"/>
+                <!--<ResourceDictionary Source="Styles/CommonStyle.xaml"/>-->
                 <ResourceDictionary Source="Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="Styles/ProgressBarStyle.xaml"/>
                 <ResourceDictionary Source="Styles/TextBoxStyle.xaml"/>
                 <ResourceDictionary Source="Styles/LabelStyle.xaml"/>
-                <ResourceDictionary Source="Styles/TabStyle.xaml"/>
+                <!--<ResourceDictionary Source="Styles/TabStyle.xaml"/>-->
+                <ResourceDictionary Source="Styles/AzureTabItem.xaml"/>
                 <ResourceDictionary Source="Styles/MenuBarStyle.xaml"/>
 
                 <ResourceDictionary Source="Styles/ValidationStyles/ErrorStyle.xaml"/>
+
+                
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

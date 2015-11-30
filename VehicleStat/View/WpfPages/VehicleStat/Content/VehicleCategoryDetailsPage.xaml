@@ -7,197 +7,356 @@
       xmlns:con="Kent.Boogaart.Converters.dll"
       xmlns:util="clr-namespace:Util.GUI"
       xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+     xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="430" d:DesignWidth="760" Background="Gainsboro"
 	  >
     <Page.Resources>
         <util:AlternationIndexToRowCountConverter x:Key="rowcountconverter" />
     </Page.Resources>
-
-    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Height="420">
-        <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <DockPanel Margin="0,0.2,0,0">
-                <StackPanel Margin="5" Orientation="Vertical" HorizontalAlignment="Left">
-                    <Label Content="Year:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"  Style="{StaticResource MediumLabel}"/>
-                    <ComboBox x:Name="YearComboBox" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5" VerticalAlignment="Top" SelectedValue="{Binding Path=Year,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content">
-                        <ComboBoxItem Content="2012"/>
-                        <ComboBoxItem Content="2013"/>
-                        <ComboBoxItem Content="2014"/>
-                    </ComboBox>
-                    <Label Content="Category:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"  Style="{StaticResource MediumLabel}"/>
-                    <ComboBox x:Name="CategoryComboBox" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5" VerticalAlignment="Top" SelectedValue="{Binding Path=SearchKey,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content">
-                        <ComboBoxItem Content="Diesel/Petrol"/>
-                        <ComboBoxItem Content="Urban/Non-Urban"/>
-                        <ComboBoxItem Content="Car/Van"/>
-                    </ComboBox>
-                    <Button x:Name="DrawButton" Style="{StaticResource ButtonFormPrimaryBlue}"  HorizontalAlignment="left"  Margin="0" Padding="5" Width="Auto" Height="35" IsDefault="True" Click="DrawButton_Click">
-                        <StackPanel Orientation="Horizontal"  Margin="0">
-                            <Image Source="/VehicleStat;component/Images/common/appbar.people.magnify.png" Margin="0,-3,0,0" Height="30"/>
-                            <Label Content="Draw"  Style="{StaticResource LableInverse}" FontSize="16" Margin="0,0,5,0" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+    <TabControl Margin="0,-42,0,0.4">
+        <TabControl.Resources>
+            <Style TargetType="TabItem" BasedOn="{StaticResource AzureTabItem}"/>
+        </TabControl.Resources>
+        <TabItem Header="Yearly" BorderBrush="Black" BorderThickness="1,1,1,1" Cursor="Hand" Margin="214,0,-232.2,0" VerticalContentAlignment="Center">
+            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Height="420">
+                <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <DockPanel Margin="0,0.2,0,0">
+                        <StackPanel Margin="5" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label Content="Year:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"  Style="{StaticResource MediumLabel}"/>
+                            <ComboBox x:Name="YearComboBox" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5" VerticalAlignment="Top" SelectedValue="{Binding Path=Year,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content">
+                                <ComboBoxItem Content="2013"/>
+                                <ComboBoxItem Content="2014"/>
+                            </ComboBox>
+                            <Label Content="Category:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"  Style="{StaticResource MediumLabel}"/>
+                            <ComboBox x:Name="CategoryComboBox" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5" VerticalAlignment="Top" SelectedValue="{Binding Path=SearchKey,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content">
+                                <ComboBoxItem Content="Diesel/Petrol"/>
+                                <ComboBoxItem Content="Urban/Non-Urban"/>
+                                <ComboBoxItem Content="Car/Van"/>
+                            </ComboBox>
+                            <Button x:Name="DrawButton" Style="{StaticResource ButtonFormPrimaryBlue}"  HorizontalAlignment="left"  Margin="0" Padding="5" Width="Auto" Height="35" IsDefault="True" Click="DrawButton_Click">
+                                <StackPanel Orientation="Horizontal"  Margin="0">
+                                    <Image Source="/VehicleStat;component/Images/common/appbar.people.magnify.png" Margin="0,-3,0,0" Height="30"/>
+                                    <Label Content="Draw"  Style="{StaticResource LableInverse}" FontSize="16" Margin="0,0,5,0" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
-                    </Button>
-                    <Button x:Name="StatButton" Style="{StaticResource ButtonFormPrimaryBlue}"  HorizontalAlignment="left"  Margin="0,20,0,0" Padding="5" Width="Auto" Height="35" IsDefault="True" Click="DrawButton_Click">
-                        <StackPanel Orientation="Horizontal"  Margin="0">
-                            <Image Source="/VehicleStat;component/Images/common/appbar.people.magnify.png" Margin="0,-3,0,0" Height="30"/>
-                            <Label Content="Stat"  Style="{StaticResource LableInverse}" FontSize="16" Margin="0,0,5,0" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
-            </DockPanel>
-        </Border>
-        <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <DockPanel x:Name="Graphs" LastChildFill="True" HorizontalAlignment="Stretch" Background="WhiteSmoke" VerticalAlignment="Stretch" Margin="0">
-                <xctk:BusyIndicator Name="BusyBar">
-                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,0,0,0">
-                        <chartingToolkit:Chart Name="mcChart"
+                    </DockPanel>
+                </Border>
+                <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <DockPanel x:Name="Graphs" LastChildFill="True" HorizontalAlignment="Stretch" Background="WhiteSmoke" VerticalAlignment="Stretch" Margin="0">
+                        <xctk:BusyIndicator Name="BusyBar">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,0,0,0">
+                                <chartingToolkit:Chart Name="mcChart"
                                 Background="WhiteSmoke"
                                 Foreground="Black"
                                 Title="Vehicle Statistics"
-                                LegendTitle="Details" Height="420" Margin="0,0,0,0" >
-                            <chartingToolkit:Chart.Series>
-                                <chartingToolkit:BarSeries Title="No of Vehicle"
+                                LegendTitle="Details" Height="420" Margin="0,0,0,0" >                                    
+                                    <chartingToolkit:Chart.Series>
+
+                                        <chartingToolkit:ColumnSeries Title="No of Vehicle"                                                                 
                                     IndependentValueBinding="{Binding Path=category}"
                                     DependentValueBinding="{Binding Path=no_vehicles}">
-                                    <!--IndependentValueBinding="{Binding Path=Key}"
-                                    DependentValueBinding="{Binding Path=Value}"-->
-                                </chartingToolkit:BarSeries>
-                                <chartingToolkit:BarSeries Title="Distance"
+                                            <chartingToolkit:ColumnSeries.IndependentAxis>
+                                                <chartingToolkit:CategoryAxis Orientation="X" />
+                                            </chartingToolkit:ColumnSeries.IndependentAxis>
+                                        </chartingToolkit:ColumnSeries>
+                                        <chartingToolkit:ColumnSeries Title="Distance"
                                     IndependentValueBinding="{Binding Path=category}"
                                     DependentValueBinding="{Binding Path=distance}">
-                                    <!--IndependentValueBinding="{Binding Path=Key}"
-                                    DependentValueBinding="{Binding Path=Value}"-->
-                                </chartingToolkit:BarSeries>
-                            </chartingToolkit:Chart.Series>
-                        </chartingToolkit:Chart>
-                    </StackPanel>
-                </xctk:BusyIndicator>
-            </DockPanel>            
-        </Border>
-        <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
-            <DockPanel x:Name="Test" LastChildFill="True" HorizontalAlignment="Stretch" Background="WhiteSmoke" VerticalAlignment="Stretch" Margin="0">
+                                        </chartingToolkit:ColumnSeries>
+                                    </chartingToolkit:Chart.Series>
+                                </chartingToolkit:Chart>
+                            </StackPanel>
+                        </xctk:BusyIndicator>
+                    </DockPanel>
+                </Border>
+                </DockPanel>
+        </TabItem>
+       
+        <TabItem Header="Graphs" BorderBrush="Black" BorderThickness="1,1,1,1" Cursor="Hand"  VerticalContentAlignment="Center" Margin="232.4,0,-233.6,-0.4" RenderTransformOrigin="0.502,0.504" Loaded="MakeGraphsEvent">
+            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Height="420">
+                <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <DockPanel x:Name="Graphs1" LastChildFill="True" HorizontalAlignment="Stretch" Background="WhiteSmoke" VerticalAlignment="Stretch" Margin="0">
+                        <xctk:BusyIndicator Name="BusyBar1">
+                            <Grid x:Name="btnService">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0"/>
+                                    <RowDefinition Height="100*"/>
+                                    <RowDefinition Height="100*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200*"/>
+                                    <ColumnDefinition Width="200*"/>
+                                    <ColumnDefinition Width="200*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Margin="5" Grid.Row="1">                                    
+                                    <chartingToolkit:Chart Name="mcChart1"
+                                Background="WhiteSmoke"
+                                Foreground="Black"
+                                Title="Vehicle Statistics"
+                                LegendTitle="Details"  Margin="0,0,0,0" >
+                                        <chartingToolkit:Chart.Series>                                            
+                                            <chartingToolkit:ColumnSeries Title="No of Vehicle"                                                                 
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=no_vehicles}">
+                                                <chartingToolkit:ColumnSeries.IndependentAxis>
+                                                    <chartingToolkit:CategoryAxis Orientation="X" />
+                                                </chartingToolkit:ColumnSeries.IndependentAxis>
+                                            </chartingToolkit:ColumnSeries>
+                                            <chartingToolkit:ColumnSeries Title="Distance"
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=distance}">
+                                            </chartingToolkit:ColumnSeries>
+                                        </chartingToolkit:Chart.Series>
+                                    </chartingToolkit:Chart>
+                                </Viewbox>
+                                <Viewbox Margin="5"  Grid.Column="1" Grid.Row="1">
+                                    <chartingToolkit:Chart Name="mcChart2"
+                                Background="WhiteSmoke"
+                                Foreground="Black"
+                                Title="Vehicle Statistics"
+                                LegendTitle="Details" Margin="0,0,0,0" >
+                                        <chartingToolkit:Chart.Series>
+
+                                            <chartingToolkit:ColumnSeries Title="No of Vehicle"                                                                 
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=no_vehicles}">
+                                                <chartingToolkit:ColumnSeries.IndependentAxis>
+                                                    <chartingToolkit:CategoryAxis Orientation="X" />
+                                                </chartingToolkit:ColumnSeries.IndependentAxis>
+                                            </chartingToolkit:ColumnSeries>
+                                            <chartingToolkit:ColumnSeries Title="Distance"
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=distance}">
+                                            </chartingToolkit:ColumnSeries>
+                                        </chartingToolkit:Chart.Series>
+                                    </chartingToolkit:Chart>
+                                </Viewbox>
+                                <Viewbox Margin="5" Grid.Column="2" Grid.Row="1">
+                                    <chartingToolkit:Chart Name="mcChart3"
+                                Background="WhiteSmoke"
+                                Foreground="Black"
+                                Title="Vehicle Statistics"
+                                LegendTitle="Details" Margin="0,0,0,0" >
+                                        <chartingToolkit:Chart.Series>
+
+                                            <chartingToolkit:ColumnSeries Title="No of Vehicle"                                                                 
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=no_vehicles}">
+                                                <chartingToolkit:ColumnSeries.IndependentAxis>
+                                                    <chartingToolkit:CategoryAxis Orientation="X" />
+                                                </chartingToolkit:ColumnSeries.IndependentAxis>
+                                            </chartingToolkit:ColumnSeries>
+                                            <chartingToolkit:ColumnSeries Title="Distance"
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=distance}">
+                                            </chartingToolkit:ColumnSeries>
+                                        </chartingToolkit:Chart.Series>
+                                    </chartingToolkit:Chart>
+                                </Viewbox>
+                                <Viewbox Margin="5" Grid.Row="2">
+                                    <chartingToolkit:Chart Name="mcChart4"
+                                Background="WhiteSmoke"
+                                Foreground="Black"
+                                Title="Vehicle Statistics"
+                                LegendTitle="Details" Margin="0,0,0,0" >
+                                        <chartingToolkit:Chart.Series>
+
+                                            <chartingToolkit:ColumnSeries Title="No of Vehicle"                                                                 
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=no_vehicles}">
+                                                <chartingToolkit:ColumnSeries.IndependentAxis>
+                                                    <chartingToolkit:CategoryAxis Orientation="X" />
+                                                </chartingToolkit:ColumnSeries.IndependentAxis>
+                                            </chartingToolkit:ColumnSeries>
+                                            <chartingToolkit:ColumnSeries Title="Distance"
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=distance}">
+                                            </chartingToolkit:ColumnSeries>
+                                        </chartingToolkit:Chart.Series>
+                                    </chartingToolkit:Chart>
+                                </Viewbox>
+                                <Viewbox Margin="5" Grid.Column="1" Grid.Row="2">
+                                    <chartingToolkit:Chart Name="mcChart5"
+                                Background="WhiteSmoke"
+                                Foreground="Black"
+                                Title="Vehicle Statistics"
+                                LegendTitle="Details" Margin="0,0,0,0" >
+                                        <chartingToolkit:Chart.Series>
+
+                                            <chartingToolkit:ColumnSeries Title="No of Vehicle"                                                                 
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=no_vehicles}">
+                                                <chartingToolkit:ColumnSeries.IndependentAxis>
+                                                    <chartingToolkit:CategoryAxis Orientation="X" />
+                                                </chartingToolkit:ColumnSeries.IndependentAxis>
+                                            </chartingToolkit:ColumnSeries>
+                                            <chartingToolkit:ColumnSeries Title="Distance"
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=distance}">
+                                            </chartingToolkit:ColumnSeries>
+                                        </chartingToolkit:Chart.Series>
+                                    </chartingToolkit:Chart>
+                                </Viewbox>
+                                <Viewbox Margin="5" Grid.Column="2" Grid.Row="2">
+                                    <chartingToolkit:Chart Name="mcChart6"
+                                Background="WhiteSmoke"
+                                Foreground="Black"
+                                Title="Vehicle Statistics"
+                                LegendTitle="Details" Margin="0,0,0,0" >
+                                        <chartingToolkit:Chart.Series>
+
+                                            <chartingToolkit:ColumnSeries Title="No of Vehicle"                                                                 
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=no_vehicles}">
+                                                <chartingToolkit:ColumnSeries.IndependentAxis>
+                                                    <chartingToolkit:CategoryAxis Orientation="X" />
+                                                </chartingToolkit:ColumnSeries.IndependentAxis>
+                                            </chartingToolkit:ColumnSeries>
+                                            <chartingToolkit:ColumnSeries Title="Distance"
+                                    IndependentValueBinding="{Binding Path=category}"
+                                    DependentValueBinding="{Binding Path=distance}">
+                                            </chartingToolkit:ColumnSeries>
+                                        </chartingToolkit:Chart.Series>
+                                    </chartingToolkit:Chart>
+                                </Viewbox>
+                            </Grid>
+                        </xctk:BusyIndicator>
+                    </DockPanel>
+                </Border>
+            </DockPanel>           
+        </TabItem>
+
+        <TabItem Header="Stat" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="232.2,0,-248,0">
+            <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <DockPanel x:Name="Test" LastChildFill="True" HorizontalAlignment="Stretch" Background="WhiteSmoke" VerticalAlignment="Stretch" Margin="0">
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,0,0,0">
-                    <Grid Margin="10" Height="Auto" x:Name="GridCustomerInfo">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                        <Grid Margin="10" Height="Auto" x:Name="GridCustomerInfo">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
 
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="63*" />
-                            <ColumnDefinition Width="38*"/>
-                            <ColumnDefinition Width="38*" />
-                            <ColumnDefinition Width="57*" />
-                            <ColumnDefinition Width="64*" />
-                            <ColumnDefinition Width="19*" />
-                        </Grid.ColumnDefinitions>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="63*" />
+                                <ColumnDefinition Width="38*"/>
+                                <ColumnDefinition Width="38*" />
+                                <ColumnDefinition Width="57*" />
+                                <ColumnDefinition Width="64*" />
+                                <ColumnDefinition Width="19*" />
+                            </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,13,5.6,7.2" HorizontalAlignment="Right" Width="188" Height="27">
-                            <Label Content="Total Vehicles" HorizontalAlignment="Right" Margin="0,0,0,5" FontWeight="Bold" VerticalAlignment="Top" Style="{StaticResource MediumLabel}" />
-                        </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,13,5.6,7.2" HorizontalAlignment="Right" Width="188" Height="27">
+                                <Label Content="Total Vehicles" HorizontalAlignment="Right" Margin="0,0,0,5" FontWeight="Bold" VerticalAlignment="Top" Style="{StaticResource MediumLabel}" />
+                            </StackPanel>
 
-                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,12.8,3.6,7.8" HorizontalAlignment="Right" Height="21" Width="38" >
-                            <Label Content="Urban:" HorizontalAlignment="Right" Margin="0,0,0,5" FontWeight="Bold" VerticalAlignment="Top"/>
-                        </StackPanel>
-                        <Grid Grid.Row="1" Margin="1.4,4.8,0.6,4.8" Grid.Column="1">
-                            <TextBox Text="20000" x:Name="CusLNameTextBox" TabIndex="2" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5"  VerticalAlignment="Top"/>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,12.8,3.6,7.8" HorizontalAlignment="Right" Height="21" Width="38" >
+                                <Label Content="Urban:" HorizontalAlignment="Right" Margin="0,0,0,5" FontWeight="Bold" VerticalAlignment="Top"/>
+                            </StackPanel>
+                            <Grid Grid.Row="1" Margin="1.4,4.8,0.6,4.8" Grid.Column="1">
+                                <TextBox Text="20000" x:Name="CusLNameTextBox" TabIndex="2" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5"  VerticalAlignment="Top"/>
+                            </Grid>
+
+                            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15.2,3.6,10.2" HorizontalAlignment="Right" Height="21" Width="67" >
+                                <Label Content="Non-Urban:" HorizontalAlignment="Right" Margin="0,0,0,5" FontWeight="Bold" VerticalAlignment="Top"/>
+                            </StackPanel>
+                            <Grid Grid.Row="2"  Grid.Column="1" Margin="1.4,5.2,0.6,5.2">
+                                <TextBox Text="20000" TabIndex="2" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5"  VerticalAlignment="Top"/>
+                            </Grid>
+
+
+                            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0,9.8,3.6,9.6" HorizontalAlignment="Right" Height="23" Width="188" >
+                                <Label Content="Total Travel Distance" HorizontalAlignment="Right" Margin="0,0,0,5" FontWeight="Bold" VerticalAlignment="Top" Style="{StaticResource MediumLabel}" />
+                            </StackPanel>
+                            <Grid Grid.Row="3" Grid.Column="1" Margin="6.4,4.8,0.6,0" VerticalAlignment="Top" Height="27">
+
+                            </Grid>
+
+                            <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Height="20" Width="73" >
+                                <Label Content=":Urban" FlowDirection="RightToLeft" HorizontalAlignment="Right" FontWeight="Bold" VerticalAlignment="Top" Width="66"/>
+                            </StackPanel>
+                            <Grid Grid.Row="4" Grid.Column="1" Margin="1.4,5.4,0.6,4.6">
+                                <TextBox Text="60000" TabIndex="2" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5"  VerticalAlignment="Top"/>
+                            </Grid>
+
+                            <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15.4,3.6,10" HorizontalAlignment="Right" Height="21" Width="70" >
+                                <Label Content="Non-Urban:" HorizontalAlignment="Right" FontWeight="Bold" VerticalAlignment="Top" Width="73"/>
+                            </StackPanel>
+                            <Grid Grid.Row="5" Grid.Column="1" Margin="1.4,5.4,0.6,5">
+                                <TextBox Text="45000" TabIndex="2" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5"  VerticalAlignment="Top"/>
+                            </Grid>
+
+                            <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15,3.6,10.6" HorizontalAlignment="Right" Height="16" Width="52" >
+
+                            </StackPanel>
+                            <Grid Grid.Row="6" Grid.Column="1" Margin="1.4,5,0.6,4.6">
+
+                            </Grid>
+
+                            <StackPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,30.4,3.6,26.4" HorizontalAlignment="Right" Height="16" Width="68" >
+                            </StackPanel>
+                            <Grid Grid.Row="7" Grid.Column="1" Margin="1.4,5.4,0.6,5.4">
+                            </Grid>
+
+
+                            <StackPanel Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0.2,10.2" Width="233">
+                                <Label Content="Average Distance Per Vehicle" HorizontalAlignment="Right" Margin="0,0,0,5" FontWeight="Bold" VerticalAlignment="Top" Style="{StaticResource MediumLabel}" />
+                            </StackPanel>
+                            <Grid Grid.Row="0" Grid.Column="3" Margin="112.4,5,0.2,5.2" Grid.ColumnSpan="2">
+
+                            </Grid>
+
+                            <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,14.8,5.2,10.8" HorizontalAlignment="Right" Height="16" Width="51" >
+                                <Label Content="Urban:" HorizontalAlignment="Right" Margin="0,0,5,0" FontWeight="Bold" Width="49"/>
+                            </StackPanel>
+                            <Grid Grid.Row="1" Grid.Column="3" Margin="112.4,4.8,0.2,4.8" Grid.ColumnSpan="2">
+                                <TextBox x:Name="CusMobile2TextBox" Text="8km" TabIndex="10" HorizontalAlignment="Stretch" ClipToBounds="True"  Margin="0,5,0,5" VerticalAlignment="Top" />
+                            </Grid>
+
+                            <StackPanel Grid.Row="2" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center"  HorizontalAlignment="Right" Height="16" Margin="0,15.2,0.2,15.2" Width="81"  >
+                                <Label Content="Non-Urban:" HorizontalAlignment="Right" Margin="0,0,5,0" FontWeight="Bold" Width="99"/>
+                            </StackPanel>
+                            <Grid Grid.Row="2" Grid.Column="3" Margin="112.4,5.2,0.2,5.2" Grid.ColumnSpan="2">
+                                <TextBox Text="5km" TabIndex="10" HorizontalAlignment="Stretch" ClipToBounds="True"  Margin="0,5,0,5" VerticalAlignment="Top" />
+                            </Grid>
+
+                            <StackPanel Grid.Row="3" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15.8,5.2,10.6" HorizontalAlignment="Right" Height="16" Width="58" >
+                            </StackPanel>
+                            <Grid Grid.Row="3" Grid.Column="3"  Grid.RowSpan="2" Margin="112.4,4.8,0.2,4.6" Grid.ColumnSpan="2">
+                            </Grid>
+
+
+                            <StackPanel Grid.Row="5" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15.4,5.2,10" HorizontalAlignment="Right" Height="21" Width="43" >
+                            </StackPanel>
+                            <Grid Grid.Row="5"  Grid.Column="3" Margin="112.4,5.4,0.2,5" Grid.ColumnSpan="2">
+                            </Grid>
+                            <Grid Grid.Row="5"  Grid.Column="5" Margin="0.8,0.4,-0.4,10">
+
+                            </Grid>
+
+                            <StackPanel Grid.Row="6" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15,5.2,10.6" HorizontalAlignment="Right" Height="16" Width="100" >
+                            </StackPanel>
+                            <Grid Grid.Row="6" Grid.Column="3" Margin="112.4,5,0.2,4.6" Grid.ColumnSpan="2">
+                            </Grid>
+
+
+                            <StackPanel Grid.Row="7" Grid.Column="3"  Orientation="Horizontal" HorizontalAlignment="right" Margin="0,41.4,0.2,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="36" Grid.RowSpan="2" Width="160">
+
+                            </StackPanel>
                         </Grid>
-
-                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15.2,3.6,10.2" HorizontalAlignment="Right" Height="21" Width="67" >
-                            <Label Content="Non-Urban:" HorizontalAlignment="Right" Margin="0,0,0,5" FontWeight="Bold" VerticalAlignment="Top"/>
-                        </StackPanel>
-                        <Grid Grid.Row="2"  Grid.Column="1" Margin="1.4,5.2,0.6,5.2">
-                            <TextBox Text="20000" TabIndex="2" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5"  VerticalAlignment="Top"/>
-                        </Grid>
-                        
-
-                        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0,9.8,3.6,9.6" HorizontalAlignment="Right" Height="23" Width="188" >
-                            <Label Content="Total Travel Distance" HorizontalAlignment="Right" Margin="0,0,0,5" FontWeight="Bold" VerticalAlignment="Top" Style="{StaticResource MediumLabel}" />
-                        </StackPanel>
-                        <Grid Grid.Row="3" Grid.Column="1" Margin="6.4,4.8,0.6,0" VerticalAlignment="Top" Height="27">
-                           
-                        </Grid>
-
-                        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Height="20" Width="73" >
-                            <Label Content=":Urban" FlowDirection="RightToLeft" HorizontalAlignment="Right" FontWeight="Bold" VerticalAlignment="Top" Width="66"/>
-                        </StackPanel>
-                        <Grid Grid.Row="4" Grid.Column="1" Margin="1.4,5.4,0.6,4.6">
-                            <TextBox Text="60000" TabIndex="2" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5"  VerticalAlignment="Top"/>
-                        </Grid>
-
-                        <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15.4,3.6,10" HorizontalAlignment="Right" Height="21" Width="70" >
-                            <Label Content="Non-Urban:" HorizontalAlignment="Right" FontWeight="Bold" VerticalAlignment="Top" Width="73"/>
-                        </StackPanel>
-                        <Grid Grid.Row="5" Grid.Column="1" Margin="1.4,5.4,0.6,5">
-                            <TextBox Text="45000" TabIndex="2" HorizontalAlignment="Stretch" ClipToBounds="True" Margin="0,5,0,5"  VerticalAlignment="Top"/>
-                        </Grid>
-
-                        <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15,3.6,10.6" HorizontalAlignment="Right" Height="16" Width="52" >
-                        
-                        </StackPanel>
-                        <Grid Grid.Row="6" Grid.Column="1" Margin="1.4,5,0.6,4.6">
-                            
-                        </Grid>
-
-                        <StackPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,30.4,3.6,26.4" HorizontalAlignment="Right" Height="16" Width="68" >
-                        </StackPanel>
-                        <Grid Grid.Row="7" Grid.Column="1" Margin="1.4,5.4,0.6,5.4">
-                        </Grid>
-
-
-                        <StackPanel Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0.2,10.2" Width="233">
-                            <Label Content="Average Distance Per Vehicle" HorizontalAlignment="Right" Margin="0,0,0,5" FontWeight="Bold" VerticalAlignment="Top" Style="{StaticResource MediumLabel}" />
-                        </StackPanel>
-                        <Grid Grid.Row="0" Grid.Column="3" Margin="112.4,5,0.2,5.2" Grid.ColumnSpan="2">
-                        
-                        </Grid>
-
-                        <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,14.8,5.2,10.8" HorizontalAlignment="Right" Height="16" Width="51" >
-                            <Label Content="Urban:" HorizontalAlignment="Right" Margin="0,0,5,0" FontWeight="Bold" Width="49"/>
-                        </StackPanel>
-                        <Grid Grid.Row="1" Grid.Column="3" Margin="112.4,4.8,0.2,4.8" Grid.ColumnSpan="2">
-                            <TextBox x:Name="CusMobile2TextBox" Text="8km" TabIndex="10" HorizontalAlignment="Stretch" ClipToBounds="True"  Margin="0,5,0,5" VerticalAlignment="Top" />
-                        </Grid>
-
-                        <StackPanel Grid.Row="2" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center"  HorizontalAlignment="Right" Height="16" Margin="0,15.2,0.2,15.2" Width="81"  >
-                            <Label Content="Non-Urban:" HorizontalAlignment="Right" Margin="0,0,5,0" FontWeight="Bold" Width="99"/>
-                        </StackPanel>
-                        <Grid Grid.Row="2" Grid.Column="3" Margin="112.4,5.2,0.2,5.2" Grid.ColumnSpan="2">
-                            <TextBox Text="5km" TabIndex="10" HorizontalAlignment="Stretch" ClipToBounds="True"  Margin="0,5,0,5" VerticalAlignment="Top" />
-                        </Grid>
-
-                        <StackPanel Grid.Row="3" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15.8,5.2,10.6" HorizontalAlignment="Right" Height="16" Width="58" >
-                        </StackPanel>
-                        <Grid Grid.Row="3" Grid.Column="3"  Grid.RowSpan="2" Margin="112.4,4.8,0.2,4.6" Grid.ColumnSpan="2">
-                        </Grid>
-
-
-                        <StackPanel Grid.Row="5" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15.4,5.2,10" HorizontalAlignment="Right" Height="21" Width="43" >
-                        </StackPanel>
-                        <Grid Grid.Row="5"  Grid.Column="3" Margin="112.4,5.4,0.2,5" Grid.ColumnSpan="2">
-                        </Grid>
-                        <Grid Grid.Row="5"  Grid.Column="5" Margin="0.8,0.4,-0.4,10">
-                            
-                        </Grid>
-
-                        <StackPanel Grid.Row="6" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,15,5.2,10.6" HorizontalAlignment="Right" Height="16" Width="100" >
-                        </StackPanel>
-                        <Grid Grid.Row="6" Grid.Column="3" Margin="112.4,5,0.2,4.6" Grid.ColumnSpan="2">
-                        </Grid>
-
-
-                        <StackPanel Grid.Row="7" Grid.Column="3"  Orientation="Horizontal" HorizontalAlignment="right" Margin="0,41.4,0.2,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="36" Grid.RowSpan="2" Width="160">
-                           
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-            </DockPanel>
-        </Border>
-    </DockPanel>
-  </Page>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </TabItem>
+    </TabControl>
+</Page>

@@ -90,15 +90,16 @@ namespace View.WpfPages.VehicleStat.Content
             {
                 //KeyValuePair<string, Nullable<int>>[] searchDetails = VehicleStatService.GetSearchKeyDetails(key, year);
                 List<tbl_search_key> searchDetails = VehicleStatService.GetSearchKeyDetailsAsList(key, year);
-                Dispatcher.Invoke((Action)(() =>((BarSeries)mcChart.Series[0]).ItemsSource=searchDetails ));
+                Dispatcher.Invoke((Action)(() =>((ColumnSeries)mcChart.Series[0]).ItemsSource=searchDetails ));
+                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart.Series[1]).ItemsSource = searchDetails));
             };
             worker.RunWorkerCompleted += (o, ea) =>
             {
                 //work has completed. you can now interact with the UI
-                VehicleStatDashBoard.Instance.BusyBar.IsBusy = false;
+                VehicleCategoryDetailsPage.Instance.BusyBar.IsBusy = false;
             };
             //set the IsBusy before you start the thread
-            VehicleStatDashBoard.Instance.BusyBar.IsBusy = true;
+            VehicleCategoryDetailsPage.Instance.BusyBar.IsBusy = true;
             worker.RunWorkerAsync();
 
 
@@ -110,6 +111,38 @@ namespace View.WpfPages.VehicleStat.Content
             //    new KeyValuePair<string, int>("Team Leader", 6),
             //    new KeyValuePair<string, int>("Project Leader", 10),
             //    new KeyValuePair<string, int>("Developer", 4) };
+        }
+
+        private void MakeGraphsEvent(object sender, RoutedEventArgs e)
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (o, ea) =>
+            {
+                //KeyValuePair<string, Nullable<int>>[] searchDetails = VehicleStatService.GetSearchKeyDetails(key, year);
+                List<tbl_search_key> searchDetails1 = VehicleStatService.GetSearchKeyDetailsAsList("diesel/petrol", 2013);
+                List<tbl_search_key> searchDetails2 = VehicleStatService.GetSearchKeyDetailsAsList("diesel/petrol", 2014);
+
+                List<tbl_search_key> searchDetails3 = VehicleStatService.GetSearchKeyDetailsAsList("Urban/Non-Urban", 2013);
+                List<tbl_search_key> searchDetails4 = VehicleStatService.GetSearchKeyDetailsAsList("Urban/Non-Urban", 2014);
+
+                List<tbl_search_key> searchDetails5 = VehicleStatService.GetSearchKeyDetailsAsList("Car/Van", 2013);
+                List<tbl_search_key> searchDetails6 = VehicleStatService.GetSearchKeyDetailsAsList("Car/Van", 2014);
+
+                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart1.Series[0]).ItemsSource = searchDetails1));
+                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart2.Series[0]).ItemsSource = searchDetails2));
+                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart3.Series[0]).ItemsSource = searchDetails3));
+                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart4.Series[0]).ItemsSource = searchDetails4));
+                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart5.Series[0]).ItemsSource = searchDetails5));
+                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart6.Series[0]).ItemsSource = searchDetails6));
+            };
+            worker.RunWorkerCompleted += (o, ea) =>
+            {
+                //work has completed. you can now interact with the UI
+                VehicleCategoryDetailsPage.Instance.BusyBar1.IsBusy = false;
+            };
+            //set the IsBusy before you start the thread
+            VehicleCategoryDetailsPage.Instance.BusyBar1.IsBusy = true;
+            worker.RunWorkerAsync();
         }
 
     }
