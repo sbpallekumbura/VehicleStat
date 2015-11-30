@@ -23,7 +23,12 @@
             <RowDefinition Height="1.5*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-    
+        <Grid>
+            <Image Source="/VehicleStat;component/Images/WpfPage/DashBoard/University_of_Moratuwa_logo.png" Width="64" Height="64"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Label Content="Powered by University of Moratuwa" Style="{StaticResource MediumLabelCenter}"/>
+        </Grid>
         <controls:Tile Title="View"
                     TiltFactor="2"
                     Margin="5"
@@ -33,7 +38,7 @@
                 <Image Source="/VehicleStat;component/Images/WpfPage/DashBoard/view.png" Width="65" Height="65"/>
                     </StackPanel>
         </controls:Tile>
-        <controls:Tile Title="Vehicle Statisics" 
+        <controls:Tile Title="Vehicle Statistics" 
                     TiltFactor="2" 
                     Margin="5"
                     Height="Auto" Width="Auto"   
