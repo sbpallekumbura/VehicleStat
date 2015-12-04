@@ -18,6 +18,7 @@ namespace VehicleStat.Data.DBModel
         public energy_dbEntities()
             : base("name=energy_dbEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
             var objectContext = (this as IObjectContextAdapter).ObjectContext;
 
             // Sets the command timeout for all the commands

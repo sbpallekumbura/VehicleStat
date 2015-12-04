@@ -81,17 +81,23 @@ namespace View.WpfPages.VehicleStat.Content
 
         private void DrawButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadBarChartData(SearchKey,Int32.Parse(Year));
+            LoadBarChartData(SearchKey);
         }
-        private void LoadBarChartData(string key,int year)
+        private void LoadBarChartData(string key)
         {
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += (o, ea) =>
             {
+                List<tbl_search_key> VehicleList = VehicleStatService.GetSearchKeyDetailsAsList(key, 2013);
+
                 //KeyValuePair<string, Nullable<int>>[] searchDetails = VehicleStatService.GetSearchKeyDetails(key, year);
-                List<tbl_search_key> searchDetails = VehicleStatService.GetSearchKeyDetailsAsList(key, year);
-                Dispatcher.Invoke((Action)(() =>((ColumnSeries)mcChart.Series[0]).ItemsSource=searchDetails ));
-                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart.Series[1]).ItemsSource = searchDetails));
+                List<tbl_search_key> searchDetails1 = VehicleStatService.GetSearchKeyDetailsAsList(key, 2013);
+                List<tbl_search_key> searchDetails2 = VehicleStatService.GetSearchKeyDetailsAsList(key, 2014);
+                List<tbl_search_key> searchDetails3 = VehicleStatService.GetSearchKeyDetailsAsListAll(key);
+                //Dispatcher.Invoke((Action)(() =>((ColumnSeries)mcChart.Series[0]).ItemsSource=searchDetails1 ));
+                //Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart.Series[1]).ItemsSource = searchDetails2));
+                Dispatcher.Invoke((Action)(() => ccChart.Series[0].ItemsSource = searchDetails1));
+                Dispatcher.Invoke((Action)(() => ccChart.Series[1].ItemsSource = searchDetails2));
             };
             worker.RunWorkerCompleted += (o, ea) =>
             {
@@ -101,16 +107,6 @@ namespace View.WpfPages.VehicleStat.Content
             //set the IsBusy before you start the thread
             VehicleCategoryDetailsPage.Instance.BusyBar.IsBusy = true;
             worker.RunWorkerAsync();
-
-
-            //((BarSeries)mcChart.Series[0]).ItemsSource = VehicleStatService.GetSearchKeyDetails(key, year);
-            //new KeyValuePair<string, int>[]{
-            //    new KeyValuePair<string, int>("Project Manager", 12),
-            //    new KeyValuePair<string, int>("CEO", 25),
-            //    new KeyValuePair<string, int>("Software Engg.", 5),
-            //    new KeyValuePair<string, int>("Team Leader", 6),
-            //    new KeyValuePair<string, int>("Project Leader", 10),
-            //    new KeyValuePair<string, int>("Developer", 4) };
         }
 
         private void MakeGraphsEvent(object sender, RoutedEventArgs e)
@@ -144,6 +140,6 @@ namespace View.WpfPages.VehicleStat.Content
             VehicleCategoryDetailsPage.Instance.BusyBar1.IsBusy = true;
             worker.RunWorkerAsync();
         }
-
+        
     }
 }

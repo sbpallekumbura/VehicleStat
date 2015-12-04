@@ -22,6 +22,7 @@
                 <!--<ResourceDictionary Source="Styles/TabStyle.xaml"/>-->
                 <ResourceDictionary Source="Styles/AzureTabItem.xaml"/>
                 <ResourceDictionary Source="Styles/MenuBarStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ModernUIStyle.xaml"/>
 
                 <ResourceDictionary Source="Styles/ValidationStyles/ErrorStyle.xaml"/>
 

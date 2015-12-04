@@ -1,0 +1,36 @@
+﻿<Page x:Class="View.WpfPages.Analysis.Content.VehicleAnalysisDetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:con="Kent.Boogaart.Converters.dll"
+      xmlns:util="clr-namespace:Util.GUI"
+      xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+      xmlns:datavis="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+     xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="430" d:DesignWidth="760" Background="Gainsboro"
+	  >
+    <Page.Resources>
+        <util:AlternationIndexToRowCountConverter x:Key="rowcountconverter" />
+    </Page.Resources>
+            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Height="420">
+                <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <DockPanel Margin="0,0.2,0,0">
+                <Label Content="Year" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="20" Width="50" />
+                <DockPanel VerticalAlignment="Center" Margin="10">
+                    <TextBox Text="{Binding ElementName=slValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Maximum="2045" Minimum="2015" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Ticks="2015, 2016, 2017, 2018, 2019, 2020, 2025, 2030, 2035, 2040, 2045" Name="slValue" />
+                </DockPanel>
+            </DockPanel>
+                </Border>
+                <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <DockPanel x:Name="Graphs" LastChildFill="True" HorizontalAlignment="Stretch" Background="WhiteSmoke" VerticalAlignment="Stretch" Margin="0">
+                        
+                    </DockPanel>
+                </Border>
+                </DockPanel>     
+       
+</Page>

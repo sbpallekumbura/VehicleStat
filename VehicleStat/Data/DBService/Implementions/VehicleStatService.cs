@@ -39,5 +39,19 @@ namespace VehicleStat.Data.DBService.Implementions
                 return null;
             }
         }
+
+        internal static List<tbl_search_key> GetSearchKeyDetailsAsListAll(string k)
+        {
+            try
+            {
+                List<tbl_search_key> searchList = db.tbl_search_key.Where(v => v.key.Trim() == k.Trim()).ToList();
+                return searchList;
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
+                return null;
+            }
+        }
     }
 }

@@ -19,8 +19,11 @@ namespace DBService.Implementions
         {
             try
             {
-                tbl_emission_test _tbl_emission_test= db.tbl_emission_test.Where(v => v.registration_no.Trim() == p.Trim()).SingleOrDefault();
-                return _tbl_emission_test;
+                using (energy_dbEntities db1 = new energy_dbEntities())
+                {
+                    tbl_emission_test _tbl_emission_test = db1.tbl_emission_test.Where(v => v.registration_no.Trim() == p.Trim()).SingleOrDefault();
+                    return _tbl_emission_test;
+                }
             }
             catch(Exception Ex)
             {
@@ -31,19 +34,20 @@ namespace DBService.Implementions
 
         internal static Util.GUI.PagingCollection<tbl_emission_test> GetSearchedVehicleListByPage(int page, string _searchText)
         {
-            PagingCollection<tbl_emission_test> pager = new PagingCollection<tbl_emission_test>();
-            int pagesize = pager.PageSize;
-            int offset = pager.PageSize * (page - 1);
+                PagingCollection<tbl_emission_test> pager = new PagingCollection<tbl_emission_test>();
+                int pagesize = pager.PageSize;
+                int offset = pager.PageSize * (page - 1);
 
-            List<tbl_emission_test> _tbl_emission_test=null;
+                List<tbl_emission_test> _tbl_emission_test = null;
 
-            _tbl_emission_test = db.tbl_emission_test.Where(v => v.registration_no.Trim() == _searchText.Trim()).ToList();
+               // _tbl_emission_test = db.tbl_emission_test.Where(v => v.registration_no.Trim() == _searchText.Trim()).ToList();
+                _tbl_emission_test = db.tbl_emission_test.SqlQuery("SELECT * FROM energy_db.tbl_emission_test where registration_no like '"+_searchText+"%'").ToList();
 
-            pager.Collection = _tbl_emission_test.Skip(offset).Take(pagesize).ToList();
-            pager.TotalCount = _tbl_emission_test.Count();
-            pager.CurrentPage = page;
+                pager.Collection = _tbl_emission_test.Skip(offset).Take(pagesize).ToList();
+                pager.TotalCount = _tbl_emission_test.Count();
+                pager.CurrentPage = page;
 
-            return pager;
+                return pager;
         }
     }
 }

@@ -49,6 +49,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="De.TorstenMandelkow.MetroChart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ModernUICharts.1.0.2\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -59,6 +63,7 @@
     <Reference Include="MahApps.Metro">
       <HintPath>..\..\..\Libraries\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Libraries\MySql.Data.6.9.7\lib\net45\MySql.Data.dll</HintPath>
@@ -140,6 +145,9 @@
     <Compile Include="Styles\AzureTabItem.xaml.cs">
       <DependentUpon>AzureTabItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Styles\ModernUIStyle.xaml.cs">
+      <DependentUpon>ModernUIStyle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Styles\LabelStyle.xaml.cs">
       <DependentUpon>LabelStyle.xaml</DependentUpon>
     </Compile>
@@ -153,9 +161,16 @@
       <DependentUpon>TextBoxStyle.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\GUI\AlternationIndexToRowCountConverter.cs" />
+    <Compile Include="Util\GUI\Text2Boolean.cs" />
     <Compile Include="Util\GUI\GridViewColumnResize.cs" />
     <Compile Include="Util\GUI\PageData.cs" />
     <Compile Include="Util\GUI\PagingCollection.cs" />
+    <Compile Include="View\WpfPages\Analysis\Content\VehicleAnalysisDetailsPage.xaml.cs">
+      <DependentUpon>VehicleAnalysisDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WpfPages\Analysis\VehicleAnalysisDashBoard.xaml.cs">
+      <DependentUpon>VehicleAnalysisDashBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WpfPages\VehicleStat\Content\VehicleCategoryDetailsPage.xaml.cs">
       <DependentUpon>VehicleCategoryDetailsPage.xaml</DependentUpon>
     </Compile>
@@ -193,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\ModernUIStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\LabelStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -214,6 +233,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\ValidationStyles\ErrorStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WpfPages\Analysis\Content\VehicleAnalysisDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WpfPages\Analysis\VehicleAnalysisDashBoard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -281,6 +308,7 @@
       <DependentUpon>EnergyDB_Model.edmx</DependentUpon>
       <LastGenOutput>EnergyDB_Model.cs</LastGenOutput>
     </None>
+    <Fakes Include="Fakes\De.TorstenMandelkow.MetroChart.fakes" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

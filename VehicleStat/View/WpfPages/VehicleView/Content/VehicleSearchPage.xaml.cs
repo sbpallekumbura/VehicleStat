@@ -68,6 +68,9 @@ namespace View.WpfPages.VehicleView.Content
                 VehicleList = _PagingCollection.Collection;
                 PagingList = _PagingCollection.PagesList;
                 Dispatcher.Invoke((Action)(() => SearchedVehicleListView.ItemsSource = VehicleList));
+                Dispatcher.Invoke((Action)(() => SearchedVehicleListView.Items.Refresh()));
+                Dispatcher.Invoke((Action)(() => PagingListView.ItemsSource = PagingList));
+                Dispatcher.Invoke((Action)(() => PagingListView.Items.Refresh()));
             };
             worker.RunWorkerCompleted += (o, ea) =>
             {
@@ -77,12 +80,14 @@ namespace View.WpfPages.VehicleView.Content
             //set the IsBusy before you start the thread
             VehicleViewDashBoard.Instance.BusyBar.IsBusy = true;
             worker.RunWorkerAsync();
+        }
 
-            
-            SearchedVehicleListView.Items.Refresh();
+        private void PaginationButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int selectedpage = int.Parse(button.Content.ToString());
 
-            PagingListView.ItemsSource = PagingList;
-            PagingListView.Items.Refresh();
+            RefreshVehicleListByPage(selectedpage);
         }
 
         private void QuickSearchButton_Click(object sender, RoutedEventArgs e)
