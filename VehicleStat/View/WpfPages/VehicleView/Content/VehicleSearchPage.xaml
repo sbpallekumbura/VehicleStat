@@ -11,8 +11,7 @@
         <util:AlternationIndexToRowCountConverter x:Key="rowcountconverter" />
         <util:Text2Boolean x:Key="textconverter"/>
     </Page.Resources>
-
-    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" >
+    <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" >
         <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top">
             <DockPanel DockPanel.Dock="Top" Height="60">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -27,107 +26,106 @@
                 </StackPanel>
             </DockPanel>
         </Border>
-        <Border BorderThickness="1,1,1,1" BorderBrush="Gray" Background="LightGray" DockPanel.Dock="Top">
-            <DockPanel LastChildFill="True" Background="WhiteSmoke" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0.2,0,0.2,0" >
-                <StackPanel>
-                    <StackPanel>
-                        <ListView x:Name="SearchedVehicleListView" AlternationCount="10000" ItemsSource="{Binding SearchedVehicleList}" util:GridViewColumnResize.Enabled="True" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"  MinHeight="100" BorderBrush="{x:Null}" Background="{x:Null}">
-                            <ListView.View>
-                                <GridView AllowsColumnReorder="False">
-                                    <GridViewColumn util:GridViewColumnResize.Width="30" DisplayMemberBinding="{Binding (ItemsControl.AlternationIndex),RelativeSource={RelativeSource AncestorType=ListViewItem},Converter={StaticResource rowcountconverter}}" >
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Tag="NO">No</GridViewColumnHeader>
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
-                                    <GridViewColumn util:GridViewColumnResize.Width="2*" DisplayMemberBinding="{Binding registration_no}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Tag="Registration_No">Registration_No</GridViewColumnHeader>
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>                                    
-                                    <GridViewColumn util:GridViewColumnResize.Width="3*" DisplayMemberBinding="{Binding test_datetime}" >
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Tag="Measuring Date Time">Measuring Date Time</GridViewColumnHeader>
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
-                                    <GridViewColumn util:GridViewColumnResize.Width="1*" DisplayMemberBinding="{Binding mileage}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Tag="Mileage">Mileage</GridViewColumnHeader>
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
-                                    <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding registration_year}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Tag="Register Year">Register Year</GridViewColumnHeader>
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
-                                    <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding make_by}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Tag="Made By">Made By</GridViewColumnHeader>
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
-                                    <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding model}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Tag="Status">Model</GridViewColumnHeader>
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
-                                    <GridViewColumn util:GridViewColumnResize.Width="50">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Button x:Name="VehicleDetailsButton" BorderBrush="{x:Null}" Style="{StaticResource Win8}" VerticalAlignment="Center" Width="25" Height="25" Margin="0,0.5,0,0">
-                                                    <StackPanel>
-                                                        <Image Source="/VehicleStat;component/images/common/appbar.arrow.right.black.png" Width="28" Height="28" Margin="-5" />
-                                                        <Label Content="{Binding ID}" HorizontalAlignment="Left" Width="125" Visibility="Hidden"/>
-                                                    </StackPanel>
-                                                </Button>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
+        <DockPanel DockPanel.Dock="Bottom">
+            <StackPanel>
+                <ListView x:Name="PagingListView" HorizontalContentAlignment="Right" ItemsSource="{Binding PagingList}" BorderBrush="{x:Null}" Background="{x:Null}" Height="30" Padding="0" Margin="0">
+                    <ListView.ItemsPanel >
+                        <ItemsPanelTemplate >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <StackPanel Orientation="Horizontal"  Margin="0">
+                                <Button Name="PageButton" BorderBrush="{x:Null}" Content="{Binding Page}" Style="{StaticResource Win8}" VerticalAlignment="Center" Width="18" Height="20" FontSize="10" Margin="0" Click="PaginationButton_Click" />
+                            </StackPanel>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="Style" TargetName="PageButton" Value="{StaticResource Win8WBlue}" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
 
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="BorderBrush" Value="LightGray" />
-                                    <Setter Property="BorderThickness" Value="0,0,0,1" />
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=NeedToSave}" Value="True">
-                                            <!--<Setter Property="Background" Value="Gainsboro"  />
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </StackPanel>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Bottom" Background="WhiteSmoke" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0.2,0,0.2,0" >
+                    <StackPanel>
+                            <ListView x:Name="SearchedVehicleListView" AlternationCount="10000" ItemsSource="{Binding SearchedVehicleList}" util:GridViewColumnResize.Enabled="True" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"  MinHeight="100" BorderBrush="{x:Null}" Background="{x:Null}">
+                                <ListView.View>
+                                    <GridView AllowsColumnReorder="False">
+                                        <GridViewColumn util:GridViewColumnResize.Width="30" DisplayMemberBinding="{Binding (ItemsControl.AlternationIndex),RelativeSource={RelativeSource AncestorType=ListViewItem},Converter={StaticResource rowcountconverter}}" >
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Tag="NO">No</GridViewColumnHeader>
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
+                                        <GridViewColumn util:GridViewColumnResize.Width="2*" DisplayMemberBinding="{Binding registration_no}">
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Tag="Registration_No">Registration_No</GridViewColumnHeader>
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
+                                        <GridViewColumn util:GridViewColumnResize.Width="3*" DisplayMemberBinding="{Binding test_datetime}" >
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Tag="Measuring Date Time">Measuring Date Time</GridViewColumnHeader>
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
+                                        <GridViewColumn util:GridViewColumnResize.Width="1*" DisplayMemberBinding="{Binding mileage}">
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Tag="Mileage">Mileage</GridViewColumnHeader>
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
+                                        <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding registration_year}">
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Tag="Register Year">Register Year</GridViewColumnHeader>
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
+                                        <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding make_by}">
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Tag="Made By">Made By</GridViewColumnHeader>
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
+                                        <GridViewColumn util:GridViewColumnResize.Width="1.5*" DisplayMemberBinding="{Binding model}">
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Tag="Status">Model</GridViewColumnHeader>
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
+                                        <GridViewColumn util:GridViewColumnResize.Width="50">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="VehicleDetailsButton" BorderBrush="{x:Null}" Style="{StaticResource Win8}" VerticalAlignment="Center" Width="25" Height="25" Margin="0,0.5,0,0">
+                                                        <StackPanel>
+                                                            <Image Source="/VehicleStat;component/images/common/appbar.arrow.right.black.png" Width="28" Height="28" Margin="-5" />
+                                                            <Label Content="{Binding ID}" HorizontalAlignment="Left" Width="125" Visibility="Hidden"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="BorderBrush" Value="LightGray" />
+                                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=NeedToSave}" Value="True">
+                                                <!--<Setter Property="Background" Value="Gainsboro"  />
                                                         <Setter Property="FontWeight" Value="Bold" />-->
-                                            <Setter Property="BorderBrush" Value="LightBlue"/>
-                                            <Setter Property="BorderThickness" Value="1,1,1,1"/>
-                                            <Setter Property="ToolTip" Value="Please Save Changes"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                        </ListView>
+                                                <Setter Property="BorderBrush" Value="LightBlue"/>
+                                                <Setter Property="BorderThickness" Value="1,1,1,1"/>
+                                                <Setter Property="ToolTip" Value="Please Save Changes"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                            </ListView>
 
-                    </StackPanel>
-                    <StackPanel>
-                        <ListView x:Name="PagingListView" HorizontalContentAlignment="Right" ItemsSource="{Binding PagingList}" BorderBrush="{x:Null}" Background="{x:Null}" Height="30" Padding="0" Margin="0">
-                            <ListView.ItemsPanel >
-                                <ItemsPanelTemplate >
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0"></StackPanel>
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
-                            <ListView.ItemTemplate>
-                                <DataTemplate >
-                                    <StackPanel Orientation="Horizontal"  Margin="0">
-                                        <Button Name="PageButton" BorderBrush="{x:Null}" Content="{Binding Page}" Style="{StaticResource Win8}" VerticalAlignment="Center" Width="18" Height="20" FontSize="10" Margin="0" Click="PaginationButton_Click" />
-                                    </StackPanel>
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                            <Setter Property="Style" TargetName="PageButton" Value="{StaticResource Win8WBlue}" />
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
-                                </DataTemplate>
-
-                            </ListView.ItemTemplate>
-
-                        </ListView>
-                    </StackPanel>
-                </StackPanel>
-            </DockPanel>
-        </Border>
+                        </StackPanel>
+        </DockPanel>
+        
     </DockPanel>
-  </Page>
+</Page>

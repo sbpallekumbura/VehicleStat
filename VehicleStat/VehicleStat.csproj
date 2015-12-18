@@ -51,7 +51,7 @@
   <ItemGroup>
     <Reference Include="De.TorstenMandelkow.MetroChart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ModernUICharts.1.0.2\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
+      <HintPath>..\..\..\Libraries\De.TorstenMandelkow.MetroChart.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -62,6 +62,9 @@
     </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\..\..\Libraries\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.3.9.0\lib\net40\MathNet.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
@@ -76,6 +79,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -161,6 +165,7 @@
       <DependentUpon>TextBoxStyle.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\GUI\AlternationIndexToRowCountConverter.cs" />
+    <Compile Include="Util\GUI\TickBarWithValues.cs" />
     <Compile Include="Util\GUI\Text2Boolean.cs" />
     <Compile Include="Util\GUI\GridViewColumnResize.cs" />
     <Compile Include="Util\GUI\PageData.cs" />
@@ -170,6 +175,9 @@
     </Compile>
     <Compile Include="View\WpfPages\Analysis\VehicleAnalysisDashBoard.xaml.cs">
       <DependentUpon>VehicleAnalysisDashBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WpfPages\VehicleStat\Content\test.xaml.cs">
+      <DependentUpon>test.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WpfPages\VehicleStat\Content\VehicleCategoryDetailsPage.xaml.cs">
       <DependentUpon>VehicleCategoryDetailsPage.xaml</DependentUpon>
@@ -244,6 +252,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\WpfPages\VehicleStat\Content\test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\WpfPages\VehicleStat\Content\VehicleCategoryDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -308,7 +320,6 @@
       <DependentUpon>EnergyDB_Model.edmx</DependentUpon>
       <LastGenOutput>EnergyDB_Model.cs</LastGenOutput>
     </None>
-    <Fakes Include="Fakes\De.TorstenMandelkow.MetroChart.fakes" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

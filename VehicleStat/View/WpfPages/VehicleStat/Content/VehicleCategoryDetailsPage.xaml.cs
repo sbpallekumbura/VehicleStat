@@ -88,14 +88,9 @@ namespace View.WpfPages.VehicleStat.Content
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += (o, ea) =>
             {
-                List<tbl_search_key> VehicleList = VehicleStatService.GetSearchKeyDetailsAsList(key, 2013);
-
-                //KeyValuePair<string, Nullable<int>>[] searchDetails = VehicleStatService.GetSearchKeyDetails(key, year);
                 List<tbl_search_key> searchDetails1 = VehicleStatService.GetSearchKeyDetailsAsList(key, 2013);
                 List<tbl_search_key> searchDetails2 = VehicleStatService.GetSearchKeyDetailsAsList(key, 2014);
-                List<tbl_search_key> searchDetails3 = VehicleStatService.GetSearchKeyDetailsAsListAll(key);
-                //Dispatcher.Invoke((Action)(() =>((ColumnSeries)mcChart.Series[0]).ItemsSource=searchDetails1 ));
-                //Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart.Series[1]).ItemsSource = searchDetails2));
+
                 Dispatcher.Invoke((Action)(() => ccChart.Series[0].ItemsSource = searchDetails1));
                 Dispatcher.Invoke((Action)(() => ccChart.Series[1].ItemsSource = searchDetails2));
             };
@@ -114,7 +109,6 @@ namespace View.WpfPages.VehicleStat.Content
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += (o, ea) =>
             {
-                //KeyValuePair<string, Nullable<int>>[] searchDetails = VehicleStatService.GetSearchKeyDetails(key, year);
                 List<tbl_search_key> searchDetails1 = VehicleStatService.GetSearchKeyDetailsAsList("diesel/petrol", 2013);
                 List<tbl_search_key> searchDetails2 = VehicleStatService.GetSearchKeyDetailsAsList("diesel/petrol", 2014);
 
@@ -124,12 +118,12 @@ namespace View.WpfPages.VehicleStat.Content
                 List<tbl_search_key> searchDetails5 = VehicleStatService.GetSearchKeyDetailsAsList("Car/Van", 2013);
                 List<tbl_search_key> searchDetails6 = VehicleStatService.GetSearchKeyDetailsAsList("Car/Van", 2014);
 
-                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart1.Series[0]).ItemsSource = searchDetails1));
-                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart2.Series[0]).ItemsSource = searchDetails2));
-                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart3.Series[0]).ItemsSource = searchDetails3));
-                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart4.Series[0]).ItemsSource = searchDetails4));
-                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart5.Series[0]).ItemsSource = searchDetails5));
-                Dispatcher.Invoke((Action)(() => ((ColumnSeries)mcChart6.Series[0]).ItemsSource = searchDetails6));
+                Dispatcher.Invoke((Action)(() => mcChart1.Series[0].ItemsSource = searchDetails1));
+                Dispatcher.Invoke((Action)(() => mcChart2.Series[0].ItemsSource = searchDetails2));
+                Dispatcher.Invoke((Action)(() => mcChart3.Series[0].ItemsSource = searchDetails3));
+                Dispatcher.Invoke((Action)(() => mcChart4.Series[0].ItemsSource = searchDetails4));
+                Dispatcher.Invoke((Action)(() => mcChart5.Series[0].ItemsSource = searchDetails5));
+                Dispatcher.Invoke((Action)(() => mcChart6.Series[0].ItemsSource = searchDetails6));
             };
             worker.RunWorkerCompleted += (o, ea) =>
             {
@@ -139,6 +133,47 @@ namespace View.WpfPages.VehicleStat.Content
             //set the IsBusy before you start the thread
             VehicleCategoryDetailsPage.Instance.BusyBar1.IsBusy = true;
             worker.RunWorkerAsync();
+        }
+
+        private List<tbl_search_key> KeyIndexList;
+
+        public List<PageData> PagingList { get; set; }
+        private PagingCollection<tbl_search_key> _PagingCollection { get; set; }
+
+        private void RefreshKeyIndexListByPage(int page)
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (o, ea) =>
+            {
+                _PagingCollection = VehicleStatService.GetKeyIndexListByPage(page);
+                KeyIndexList = _PagingCollection.Collection;
+                PagingList = _PagingCollection.PagesList;
+                Dispatcher.Invoke((Action)(() => KeyIndexListView.ItemsSource = KeyIndexList));
+                Dispatcher.Invoke((Action)(() => KeyIndexListView.Items.Refresh()));
+                Dispatcher.Invoke((Action)(() => PagingListView.ItemsSource = PagingList));
+                Dispatcher.Invoke((Action)(() => PagingListView.Items.Refresh()));
+            };
+            worker.RunWorkerCompleted += (o, ea) =>
+            {
+                //work has completed. you can now interact with the UI
+                VehicleCategoryDetailsPage.Instance.BusyBar2.IsBusy = false;
+            };
+            //set the IsBusy before you start the thread
+            VehicleCategoryDetailsPage.Instance.BusyBar2.IsBusy = true;
+            worker.RunWorkerAsync();
+        }
+
+        private void PaginationButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            int selectedpage = int.Parse(button.Content.ToString());
+
+            RefreshKeyIndexListByPage(selectedpage);
+        }
+
+        private void TabItem_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            RefreshKeyIndexListByPage(1);
         }
         
     }

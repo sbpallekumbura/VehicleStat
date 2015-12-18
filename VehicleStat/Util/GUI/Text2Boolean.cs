@@ -15,7 +15,7 @@ namespace Util.GUI
         {
             Boolean s=false;
             string v = (string)value;
-            if(Regex.IsMatch((string)value, "^[0-9A-Za-z]{1,3}[-][0-9]{3}"))
+            if(Regex.IsMatch((string)value, "^[0-9A-Za-z]{1,3}[-][0-9]{3,4}$"))
             {
                 s = true;
             }

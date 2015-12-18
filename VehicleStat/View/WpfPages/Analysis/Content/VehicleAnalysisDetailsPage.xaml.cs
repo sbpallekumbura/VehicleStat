@@ -44,7 +44,25 @@ namespace View.WpfPages.Analysis.Content
                 return _instance;
             }
         }
-      
+
+        private void LoadLineChartData(string key)
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (o, ea) =>
+            {
+                List<tbl_search_key> searchDetails1 = VehicleStatService.GetSearchKeyDetailsByCategory(key);
+
+                Dispatcher.Invoke((Action)(() => ((LineSeries)lchart.Series[0]).ItemsSource = searchDetails1));
+            };
+            worker.RunWorkerCompleted += (o, ea) =>
+            {
+                //work has completed. you can now interact with the UI
+                VehicleAnalysisDetailsPage.Instance.BusyBar.IsBusy = false;
+            };
+            //set the IsBusy before you start the thread
+            VehicleAnalysisDetailsPage.Instance.BusyBar.IsBusy = true;
+            worker.RunWorkerAsync();
+        }
 
         protected virtual void OnPropertyChanged(string name)
         {
@@ -53,6 +71,11 @@ namespace View.WpfPages.Analysis.Content
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        private void Page_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            LoadLineChartData("petrol");
         }   
 
     }

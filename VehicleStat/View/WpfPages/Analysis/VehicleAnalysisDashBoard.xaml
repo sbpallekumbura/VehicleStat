@@ -9,7 +9,7 @@
       d:DesignHeight="500" d:DesignWidth="770">
 
     <Border CornerRadius="5" BorderThickness="2">
-        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" >
+        <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" >
             <DockPanel x:Name="FileMenu" DockPanel.Dock="Top" Height="60" >
                 <Button Style="{DynamicResource MetroCircleButtonStyle}" Width="50" Height="50" Click="backButtonEvent">
                     <Image Source="/VehicleStat;component/Images/common/appbar.arrow.left.png" Width="40" Height="40" Margin="0"/>
@@ -18,7 +18,7 @@
                     <Label Content="Vehicle Analysis" VerticalContentAlignment="Center" Margin="5" FontSize="18" FontWeight="SemiBold"/>
                 </StackPanel>
             </DockPanel>
-            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
                 <xctk:BusyIndicator Name="BusyBar">
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,0,0,0">
                         <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>

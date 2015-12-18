@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                        
-        Title="Next Gen Energy Model" MinWidth="800" MinHeight="600"
+        Title="Next Gen Energy Model" MinWidth="800" MinHeight="600" Width="800" Height="610" 
         BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"                       
         BorderThickness="1" WindowStartupLocation="CenterScreen" Closing="MainWindow_Closing">
     
@@ -18,9 +18,8 @@
                     </Label>
                 </Grid>
             </DockPanel>
-
-            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,0,5,5">
-                    <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" Margin="5,0,5,4.8">         
+                <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
             </DockPanel>
-        </DockPanel>        
+    </DockPanel>        
 </Controls:MetroWindow>

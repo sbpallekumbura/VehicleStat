@@ -11,6 +11,7 @@ using System.ComponentModel;
 using View.WpfWindows;
 using VehicleStat.View.WpfPages.DashBoard;
 using View.WpfPages.VehicleStat.Content;
+using VehicleStat.View.WpfPages.VehicleStat.Content;
 
 namespace View.WpfPages.VehicleStat
 {
